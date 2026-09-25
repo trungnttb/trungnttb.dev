@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 170" font-family="ui-monospace, Menlo, monospace" font-size="13">
+  <title>Một request tới trang chi tiết: HTML tĩnh từ GitHub Pages, JS nhỏ, Three.js chỉ tải khi cần</title>
+  <rect width="640" height="170" fill="#1f1614"/>
+  <g fill="#33261f" stroke="#b89a80">
+    <rect x="20" y="55" width="150" height="60" rx="6"/>
+    <rect x="245" y="55" width="150" height="60" rx="6"/>
+    <rect x="470" y="20" width="150" height="50" rx="6"/>
+    <rect x="470" y="100" width="150" height="50" rx="6"/>
+  </g>
+  <g fill="#eadbc8" text-anchor="middle">
+    <text x="95" y="82">GitHub Pages</text><text x="95" y="100" fill="#b89a80">dist/ tĩnh</text>
+    <text x="320" y="82">HTML + CSS</text><text x="320" y="100" fill="#b89a80">+ JS 11,5 KB gz</text>
+    <text x="545" y="42">bấm `</text><text x="545" y="58" fill="#b89a80">Three.js 136 KB gz</text>
+    <text x="545" y="122">mở diagram</text><text x="545" y="138" fill="#b89a80">Mermaid, tải khi cần</text>
+  </g>
+  <g stroke="#d9a066" stroke-width="1.6" fill="none">
+    <path d="M170 85 H245"/><path d="M395 85 C430 85 440 45 470 45"/><path d="M395 85 C430 85 440 125 470 125"/>
+  </g>
+</svg>
