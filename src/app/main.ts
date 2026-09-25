@@ -1,6 +1,7 @@
 import { profile } from '../data/profile';
 import type { SceneHandle } from '../scene/scene';
 import { createCli } from './cli';
+import { createClockWidget } from './clock-widget';
 import { installCopyButtons } from './copy';
 import { byId, finePointer, prefersReducedMotion } from './dom';
 import type { CollectionName, EntrySummary } from './entries';
@@ -16,32 +17,29 @@ const SNAP_THRESHOLD = 0.3;
 const WHEEL_GAIN = 0.0012;
 const TOUCH_GAIN = 0.0035;
 
-/** Dev-only `?at=HH:MM` pins the scene's clock, to preview each lighting preset. */
-function devClock(): (() => Date) | undefined {
-  if (!import.meta.env.DEV) return undefined;
-  const match = /^(\d{1,2}):(\d{2})$/.exec(new URLSearchParams(location.search).get('at') ?? '');
-  if (!match) return undefined;
-  return () => {
-    const date = new Date();
-    date.setHours(Number(match[1]), Number(match[2]), 0, 0);
-    return date;
-  };
-}
-
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
 
 export function boot(): void {
   const app = byId('app');
   const entries = JSON.parse(byId('entries-data').textContent ?? '[]') as EntrySummary[];
   const reducedMotion = prefersReducedMotion();
-  // Read before the initial replaceState below drops the query string.
-  const clock = devClock();
   const sceneContainer = byId('scene');
   const loading = byId('scene-loading');
   const hint = byId('scene-hint');
   const toggleButton = byId<HTMLButtonElement>('toggle');
 
   installCopyButtons();
+
+  const clockWidget = createClockWidget(
+    {
+      clock: byId<HTMLButtonElement>('clock'),
+      hourHand: document.getElementById('clock-hour') as unknown as SVGElement,
+      minuteHand: document.getElementById('clock-minute') as unknown as SVGElement,
+      label: byId('clock-label'),
+      auto: byId<HTMLButtonElement>('clock-auto'),
+    },
+    (clock) => scene?.setClock(clock),
+  );
 
   let mode: Mode = 'scene';
   let scene: SceneHandle | null = null;
@@ -140,7 +138,8 @@ export function boot(): void {
       const { mountScene } = await import('../scene/scene');
       scene = mountScene(sceneContainer, {
         reducedMotion,
-        clock,
+        engraving: profile.domain,
+        clock: clockWidget.now,
         onBackground: (color) => document.documentElement.style.setProperty('--scene-bg', color),
       });
       render();
@@ -218,10 +217,10 @@ export function boot(): void {
     touchY = null;
   });
 
-  // `~` always switches views, even while typing in the terminal (design D8).
+  // The backquote key (below Esc, no Shift) always switches views, even while typing (design D8).
   window.addEventListener('keydown', (event) => {
     if (event.isComposing) return;
-    if (event.key === '~') {
+    if (event.key === '`' && !event.ctrlKey && !event.metaKey && !event.altKey) {
       event.preventDefault();
       toggle();
       return;
@@ -232,6 +231,7 @@ export function boot(): void {
     }
   });
   toggleButton.addEventListener('click', toggle);
+  byId('hint-key').addEventListener('click', toggle);
 
   window.addEventListener('popstate', (event) => {
     const state = event.state as HistoryState | null;

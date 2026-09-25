@@ -3,6 +3,8 @@
 
 export interface Profile {
   siteTitle: string;
+  /** Engraved on the desk in the 3D scene. */
+  domain: string;
   greeting: string;
   name: string;
   role: string;
@@ -13,6 +15,7 @@ export interface Profile {
 
 export const profile: Profile = {
   siteTitle: 'portfolio',
+  domain: 'trungnttb.dev',
   greeting: 'Hi there, thanks for stopping by.',
   name: 'Your Name',
   role: 'Software Engineer',

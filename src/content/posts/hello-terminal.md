@@ -24,4 +24,4 @@ export function greet(name: string): string {
 console.log(greet('terminal'));
 ```
 
-> Press `~` at any time to jump between the desk and the terminal.
+> Press `` ` `` at any time to jump between the desk and the terminal.

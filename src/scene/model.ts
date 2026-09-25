@@ -23,6 +23,11 @@ const palette = {
   chair: '#2f2f35',
   skin: '#e2b48f',
   hair: '#2b1d16',
+  eye: '#1f1712',
+  mouth: '#9a5a4a',
+  stubble: '#b88867',
+  frame: '#1c1a1a',
+  lens: '#bcd7e6',
   hoodie: '#3f6e73',
   pants: '#2c3440',
   shoe: '#1e1e22',
@@ -61,14 +66,54 @@ function limb(from: THREE.Vector3, to: THREE.Vector3, thickness: number, color: 
 
 const DESK_TOP = 0.78;
 
-function buildDesk(): THREE.Group {
+function buildDesk(engraving: string): THREE.Group {
   const desk = new THREE.Group();
   desk.name = 'Desk';
   desk.add(box(1.6, 0.06, 0.8, palette.desk, 0, DESK_TOP - 0.03, 0));
+  desk.add(buildEngraving(engraving));
   for (const x of [-0.74, 0.74]) {
     for (const z of [-0.34, 0.34]) desk.add(box(0.06, DESK_TOP - 0.06, 0.06, palette.deskLeg, x, (DESK_TOP - 0.06) / 2, z));
   }
   return desk;
+}
+
+/** Text cut into the desk top along the +X edge, ending at the corner nearest the plant. */
+function buildEngraving(text: string): THREE.Mesh {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024;
+  canvas.height = 128;
+  const ctx = canvas.getContext('2d')!;
+  ctx.font = '700 84px ui-monospace, Menlo, Consolas, monospace';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  // A light lip under a dark groove reads as a cut into the wood.
+  ctx.fillStyle = 'rgba(214, 150, 98, 0.9)';
+  ctx.fillText(text, canvas.width - 12, canvas.height / 2 + 4);
+  ctx.fillStyle = 'rgba(74, 42, 24, 0.95)';
+  ctx.fillText(text, canvas.width - 14, canvas.height / 2);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 8;
+  const width = 0.56;
+  const mesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(width, width / 8),
+    new THREE.MeshStandardMaterial({
+      map: texture,
+      transparent: true,
+      roughness: 0.9,
+      polygonOffset: true,
+      polygonOffsetFactor: -2,
+    }),
+  );
+  mesh.name = 'Engraving';
+  // Lie flat, reading along −Z (left to right from the overview camera) with the letters' tops toward −X.
+  mesh.rotation.order = 'YXZ';
+  mesh.rotation.set(-Math.PI / 2, Math.PI / 2, 0);
+  const height = width / 8;
+  mesh.position.set(0.8 - height / 2 - 0.02, DESK_TOP + 0.0008, -0.4 + 0.03 + width / 2);
+  mesh.receiveShadow = true;
+  return mesh;
 }
 
 function screenTexture(): THREE.CanvasTexture {
@@ -108,7 +153,7 @@ function buildLaptop(): THREE.Group {
   const screen = new THREE.Mesh(
     new THREE.PlaneGeometry(0.33, 0.21),
     // Unlit and not tone-mapped so its colour matches the DOM terminal it cross-fades into.
-    new THREE.MeshBasicMaterial({ map: screenTexture(), toneMapped: false }),
+    new THREE.MeshBasicMaterial({ map: screenTexture(), toneMapped: false, polygonOffset: true, polygonOffsetFactor: -1 }),
   );
   screen.name = 'Screen';
   screen.position.set(0, 0.125, 0.0006);
@@ -188,6 +233,62 @@ function buildChair(): THREE.Group {
   return chair;
 }
 
+/**
+ * Head of a man around thirty with short hair and glasses; the face looks down −Z.
+ * Every overlay sits at least ~1 mm off the skull and off its neighbours: coplanar faces z-fight
+ * and flicker as the camera moves.
+ */
+function buildHead(): THREE.Group {
+  const head = new THREE.Group();
+  head.name = 'Head';
+  const v = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
+  const FACE_Z = -0.1125;
+
+  // Skull: 0.22 wide, 0.24 tall, 0.22 deep (x ±0.11, y ±0.12, z ±0.11).
+  head.add(box(0.22, 0.24, 0.22, palette.skin));
+
+  // Short hair: a cap with a slight fringe, the back of the head, and trimmed sides.
+  head.add(box(0.236, 0.075, 0.236, palette.hair, 0, 0.1225, 0));
+  head.add(box(0.232, 0.17, 0.03, palette.hair, 0, 0.02, 0.109));
+  for (const side of [-1, 1]) head.add(box(0.01, 0.06, 0.16, palette.hair, side * 0.116, 0.06, 0.02));
+
+  for (const side of [-1, 1]) {
+    head.add(box(0.015, 0.05, 0.035, palette.skin, side * 0.1185, -0.005, 0.0125));
+    head.add(box(0.028, 0.026, 0.004, palette.eye, side * 0.048, 0.015, FACE_Z));
+    head.add(box(0.05, 0.012, 0.004, palette.hair, side * 0.05, 0.052, FACE_Z));
+  }
+  head.add(box(0.024, 0.036, 0.018, palette.skin, 0, -0.012, -0.118));
+  head.add(box(0.045, 0.008, 0.004, palette.mouth, 0, -0.058, FACE_Z));
+  head.add(box(0.19, 0.035, 0.004, palette.stubble, 0, -0.095, FACE_Z));
+
+  // Glasses: two rectangular frames, a bridge, lenses, and temples back to the ears.
+  const GLASS_Z = -0.13;
+  const t = 0.007;
+  const lensW = 0.064;
+  const lensH = 0.048;
+  for (const side of [-1, 1]) {
+    const cx = side * 0.05;
+    const cy = 0.013;
+    head.add(box(lensW, t, 0.006, palette.frame, cx, cy + lensH / 2 - t / 2, GLASS_Z));
+    head.add(box(lensW, t, 0.006, palette.frame, cx, cy - lensH / 2 + t / 2, GLASS_Z));
+    head.add(box(t, lensH - 2 * t, 0.006, palette.frame, cx - lensW / 2 + t / 2, cy, GLASS_Z));
+    head.add(box(t, lensH - 2 * t, 0.006, palette.frame, cx + lensW / 2 - t / 2, cy, GLASS_Z));
+    const lens = new THREE.Mesh(
+      new THREE.BoxGeometry(lensW - 2 * t, lensH - 2 * t, 0.002),
+      new THREE.MeshStandardMaterial({ color: palette.lens, transparent: true, opacity: 0.28, roughness: 0.1, depthWrite: false }),
+    );
+    lens.position.set(cx, cy, GLASS_Z);
+    head.add(lens);
+    const hinge = v(side * (0.05 + lensW / 2 - 0.002), 0.03, GLASS_Z);
+    const temple = v(side * 0.1145, 0.03, -0.09);
+    head.add(limb(hinge, temple, 0.006, palette.frame));
+    head.add(limb(temple, v(side * 0.1145, 0.03, 0.01), 0.006, palette.frame));
+  }
+  head.add(box(0.036, 0.006, 0.006, palette.frame, 0, 0.02, GLASS_Z));
+
+  return head;
+}
+
 function buildPerson(): THREE.Group {
   const person = new THREE.Group();
   person.name = 'Person';
@@ -203,14 +304,8 @@ function buildPerson(): THREE.Group {
   person.add(box(0.38, 0.5, 0.22, palette.hoodie, 0, 0.82, 0.66));
   person.add(box(0.2, 0.06, 0.2, palette.skin, 0, 1.09, 0.66));
 
-  const head = new THREE.Group();
-  head.name = 'Head';
+  const head = buildHead();
   head.position.set(0, 1.23, 0.64);
-  head.add(box(0.22, 0.24, 0.22, palette.skin));
-  head.add(box(0.24, 0.08, 0.24, palette.hair, 0, 0.1, 0.01));
-  head.add(box(0.24, 0.2, 0.06, palette.hair, 0, 0.02, 0.1));
-  head.add(box(0.03, 0.14, 0.2, palette.hair, -0.12, 0.02, 0.03));
-  head.add(box(0.03, 0.14, 0.2, palette.hair, 0.12, 0.02, 0.03));
   person.add(head);
 
   for (const side of [-1, 1]) {
@@ -227,7 +322,7 @@ function buildPerson(): THREE.Group {
   return person;
 }
 
-export function buildWorkspace(): THREE.Group {
+export function buildWorkspace(engraving: string): THREE.Group {
   const root = new THREE.Group();
   root.name = 'Workspace';
 
@@ -238,6 +333,6 @@ export function buildWorkspace(): THREE.Group {
   rug.castShadow = false;
   root.add(rug);
 
-  root.add(buildDesk(), buildLaptop(), buildMug(), buildLamp(), buildPlant(), buildChair(), buildPerson());
+  root.add(buildDesk(engraving), buildLaptop(), buildMug(), buildLamp(), buildPlant(), buildChair(), buildPerson());
   return root;
 }

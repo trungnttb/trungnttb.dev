@@ -10,7 +10,7 @@ Trạng thái: **đã chốt hướng cho cả 3 phần** · cập nhật 2026-0
 - **Ánh sáng theo giờ của máy người xem**, gồm 4 mức: sáng sớm, buổi sáng, buổi chiều, buổi tối. Từ 18h chuyển sang tối.
 - Có dòng hướng dẫn scroll xuống để đi tiếp.
 - **Scroll xuống:** camera zoom dần vào màn hình laptop rồi hiện giao diện CLI.
-- **Phím `~`:** bấm lần 1 thì zoom thẳng vào CLI, bấm lần 2 thì quay lại trang chủ.
+- **Phím `~`** (sau đổi thành `` ` ``, xem D8): bấm lần 1 thì zoom thẳng vào CLI, bấm lần 2 thì quay lại trang chủ.
 - **CLI:** theme tối màu cafe. Dòng đầu liệt kê các lệnh `/help /me /projects /posts /notes`.
   - `/help`: mỗi lệnh một dòng, kèm hướng dẫn.
   - `/me`: lời chào, tên, nghề nghiệp, bio và vài chia sẻ.
@@ -120,6 +120,8 @@ Rút ra từ các điểm trên, chưa kiểm chứng thêm:
 
 ### D8 — Chuyển giữa màn 3D và CLI
 
+- **Đổi phím (người dùng yêu cầu 2026-09-25):** dùng phím `` ` `` (ngay dưới Esc, không cần giữ Shift) thay cho `~`. Trên màn hình, chữ "nhấn ~" được thay bằng hình một phím bàn phím có ký tự `` ` ``, bấm vào đó cũng chuyển cảnh. Nút nổi ở góc dưới bên phải cũng là hình phím này. Nhấn Shift+`` ` `` (tức `~`) thì không có tác dụng. Các ý bên dưới viết `~` là theo bản cũ; bây giờ hiểu là `` ` ``.
+
 - **Chốt (người dùng trả lời 2026-09-25):** có một nút `~` nổi ở góc màn hình, và trên điện thoại vuốt được.
 - **Desktop:** scroll xuống thì zoom dần vào màn hình laptop. Bấm phím `~` thì zoom thẳng vào CLI; bấm `~` lần nữa thì quay lại màn 3D.
 - **Điện thoại:** vuốt lên ở màn 3D chạy cùng đoạn animation zoom như scroll trên desktop.
@@ -129,6 +131,22 @@ Rút ra từ các điểm trên, chưa kiểm chứng thêm:
 - **Xem lại khi:**
   - có lệnh cần gõ ký tự `~`: lúc đó chỉ cho `~` chuyển cảnh khi ô nhập đang trống.
   - vuốt trên điện thoại bị giật, hoặc bị nhầm với thao tác cuộn trang: lúc đó trên điện thoại chỉ giữ nút `~`.
+
+### D9 — Chỉnh giờ bằng tay trên màn 3D
+
+- **Yêu cầu (người dùng, 2026-09-25):** có nút Auto (mặc định) và một đồng hồ bấm vào được để đổi ánh sáng; lựa chọn lưu vào `localStorage`.
+- **Cách làm:** đồng hồ kim nằm ở góc trên bên phải màn 3D. Mỗi lần bấm, ánh sáng chuyển sang mức kế tiếp: sáng sớm 06:00 → buổi sáng 09:30 → buổi chiều 15:00 → buổi tối 21:00, rồi quay lại sáng sớm. Nếu đang ở Auto thì lần bấm đầu chuyển sang mức ngay sau mức đang hiển thị. Nút Auto quay về theo giờ máy. Khi đổi, ánh sáng chuyển dần trong 0,7 giây.
+- **Lưu trữ:** key `portfolio.timeOfDay` trong `localStorage`. Chọn Auto thì xoá key. Nếu trình duyệt chặn `localStorage` (ví dụ tab ẩn danh) thì lựa chọn chỉ có tác dụng tới khi tải lại trang.
+- **Bỏ:** tham số dev `?at=HH:MM`, vì đồng hồ này đã làm được việc đó.
+- **Xem lại khi:** muốn chọn một giờ bất kỳ thay vì 4 mức cố định. Lúc đó cho kéo kim đồng hồ.
+
+### D10 — Tương tác và chi tiết model
+
+- **Kéo ngang để xoay** cảnh quanh bàn (người dùng yêu cầu 2026-09-25). Khi zoom vào laptop, góc xoay tự trả dần về 0 để đường bay của camera không cắt qua người hay bàn.
+- **Chữ khắc `trungnttb.dev`** nằm ở góc dưới bên phải mặt bàn theo góc nhìn mặc định, tức cạnh +x và đầu −z, cạnh chậu cây. Nội dung chữ lấy từ `profile.domain`.
+- **Mặt nhân vật:** nam khoảng 30 tuổi, kính cận gọng đen, tóc ngắn, râu lún phún quanh cằm.
+- **Tóc nhấp nháy:** đây là z-fighting, do vài mặt của các khối tóc nằm trùng mặt phẳng với mặt đầu. Đã dựng lại đầu sao cho mọi mặt lệch nhau ít nhất khoảng 1 mm.
+- **Góc nhìn mặc định** vẫn là từ sau lưng chếch bên phải, để thấy màn hình laptop. Mặt nhân vật chỉ thấy rõ khi kéo xoay.
 
 ## 5. Quy ước giữa code và file model
 
@@ -144,7 +162,7 @@ Người ngồi không cần node riêng, trừ khi sau này làm animation cho 
 
 ## 6. Câu hỏi còn mở
 
-Không còn câu nào. Q1–Q6 đã chốt thành D3, D5, D6, D7 và D8.
+Không còn câu nào. Q1–Q6 đã chốt thành D3, D5, D6, D7 và D8. Các yêu cầu thêm sau đó được ghi ở D8 (đổi phím), D9 và D10.
 
 ## 7. Chưa làm
 
@@ -153,3 +171,5 @@ Không còn câu nào. Q1–Q6 đã chốt thành D3, D5, D6, D7 và D8.
 - Chưa kiểm tra trên điện thoại thật: thao tác vuốt.
 - Nút Copy: chưa lần nào thấy copy thành công. Tab trình duyệt dùng để test không có focus, nên trình duyệt từ chối ghi clipboard và nút hiện "Copy failed" (đúng như code xử lý).
 - Chưa kiểm tra trường hợp người xem bật `prefers-reduced-motion`.
+- Phím `` ` ``: đã kiểm tra handler nhận đúng phím và `~` không có tác dụng. Chưa xem được cả đoạn animation zoom sau khi đổi phím, vì tab test bị ẩn nên `requestAnimationFrame` không chạy.
+- Hết nhấp nháy ở tóc: chưa xác nhận trên màn hình thật, vì ảnh chụp tĩnh không bắt được hiện tượng này.

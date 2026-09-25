@@ -41,7 +41,7 @@ export function createCli(options: CliOptions): Cli {
       for (const name of COMMANDS) {
         print(line('cli-help-row', commandButton(name), h('span', { class: 'cli-dim' }, t(describeKey(name)))));
       }
-      print(line('cli-dim cli-gap', t('help.tips')));
+      print(line('cli-dim cli-gap', `${t('help.tipsLabel')} `, h('kbd', { class: 'keycap keycap-sm' }, '`'), ` ${t('help.tips')}`));
     },
     me() {
       print(

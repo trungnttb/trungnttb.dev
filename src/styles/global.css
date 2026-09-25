@@ -47,7 +47,8 @@ body {
 }
 
 #cli,
-#scene-hint {
+#scene-hint,
+#time-control {
   transition: opacity 280ms ease, visibility 0s linear 280ms;
 }
 
@@ -62,7 +63,8 @@ body {
   transition: opacity 280ms ease, visibility 0s;
 }
 
-[data-mode="cli"] #scene-hint {
+[data-mode="cli"] #scene-hint,
+[data-mode="cli"] #time-control {
   opacity: 0 !important;
   visibility: hidden;
 }
@@ -375,4 +377,54 @@ body {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* ---------- keycap: the ` toggle key drawn as a physical key ---------- */
+
+.keycap {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-coffee-600);
+  border-bottom-width: 3px;
+  background: linear-gradient(to bottom, var(--color-coffee-800), var(--color-coffee-850));
+  color: var(--color-crema);
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  /* The backquote glyph sits at cap height; push it down so it reads as centred on the key. */
+  padding-top: 0.4em;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
+  transition: transform 80ms ease, border-bottom-width 80ms ease;
+}
+.keycap:hover {
+  background: linear-gradient(to bottom, var(--color-coffee-700), var(--color-coffee-800));
+}
+.keycap:active {
+  transform: translateY(2px);
+  border-bottom-width: 1px;
+}
+.keycap:focus-visible {
+  outline: 2px solid var(--color-crema);
+  outline-offset: 2px;
+}
+.keycap-sm {
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0.35em 0.3rem 0;
+  font-size: 1.1rem;
+  border-bottom-width: 2px;
+  cursor: default;
+  box-shadow: none;
+  vertical-align: -0.2rem;
+}
+.keycap-lg {
+  min-width: 2.75rem;
+  height: 2.75rem;
+  font-size: 2rem;
 }

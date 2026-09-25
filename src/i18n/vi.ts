@@ -5,9 +5,16 @@ export const vi: Messages = {
 
   'scene.hint.scroll': 'Cuộn xuống',
   'scene.hint.swipe': 'Vuốt lên',
-  'scene.hint.key': 'hoặc nhấn ~',
+  'scene.hint.key': 'hoặc nhấn',
   'scene.loading': 'Đang tải cảnh 3D…',
-  'toggle.label': 'Chuyển giữa bàn làm việc và terminal (~)',
+  'clock.label': 'Đổi giờ trong ngày để đổi ánh sáng',
+  'clock.auto': 'Tự động',
+  'clock.autoLabel': 'Theo giờ trên máy của bạn',
+  'clock.preset.dawn': 'Sáng sớm',
+  'clock.preset.morning': 'Buổi sáng',
+  'clock.preset.afternoon': 'Buổi chiều',
+  'clock.preset.night': 'Buổi tối',
+  'toggle.label': 'Chuyển giữa bàn làm việc và terminal (`)',
 
   'cli.prompt': 'guest@portfolio:~$',
   'cli.inputLabel': 'Ô nhập lệnh',
@@ -23,7 +30,8 @@ export const vi: Messages = {
   'cmd.notes': 'Script và đoạn code dùng độc lập (mở cửa sổ danh sách)',
 
   'help.title': 'Các lệnh có sẵn:',
-  'help.tips': 'Mẹo: ~ để chuyển giữa bàn làm việc và terminal · ↑/↓ gọi lại lệnh đã gõ · Tab để tự điền lệnh.',
+  'help.tipsLabel': 'Mẹo:',
+  'help.tips': 'để chuyển giữa bàn làm việc và terminal · ↑/↓ gọi lại lệnh đã gõ · Tab để tự điền lệnh.',
 
   'me.shares': 'Vài điều muốn chia sẻ:',
   'me.links': 'Tìm tôi ở:',

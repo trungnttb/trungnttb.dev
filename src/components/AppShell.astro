@@ -51,6 +51,33 @@ const entriesJson = JSON.stringify(summaries).replace(/</g, '\\u003c');
     {t('scene.loading')}
   </p>
 
+  <div id="time-control" class="fixed top-4 right-4 flex items-center gap-2">
+    <button
+      id="clock-auto"
+      type="button"
+      class="rounded-full border border-coffee-700 bg-coffee-950/65 px-3 py-1.5 text-xs text-foam backdrop-blur-sm hover:bg-coffee-800 focus-visible:outline-2 focus-visible:outline-crema aria-pressed:border-crema aria-pressed:text-crema"
+      aria-pressed="true"
+      title={t('clock.autoLabel')}>{t('clock.auto')}</button>
+    <button
+      id="clock"
+      type="button"
+      class="flex items-center gap-2 rounded-full border border-coffee-700 bg-coffee-950/65 py-1 pr-3 pl-1 text-xs text-foam backdrop-blur-sm hover:bg-coffee-800 focus-visible:outline-2 focus-visible:outline-crema"
+      aria-label={t('clock.label')}
+      title={t('clock.label')}
+    >
+      <svg class="h-8 w-8" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="var(--color-foam)" stroke="var(--color-coffee-600)" stroke-width="2"></circle>
+        {Array.from({ length: 12 }, (_, i) => (
+          <line x1="16" y1="4" x2="16" y2={i % 3 === 0 ? 7 : 5.5} stroke="var(--color-coffee-600)" stroke-width="1.2" transform={`rotate(${i * 30} 16 16)`}></line>
+        ))}
+        <line id="clock-hour" x1="16" y1="16" x2="16" y2="9.5" stroke="var(--color-coffee-950)" stroke-width="2.4" stroke-linecap="round"></line>
+        <line id="clock-minute" x1="16" y1="16" x2="16" y2="6" stroke="var(--color-crema)" stroke-width="1.6" stroke-linecap="round"></line>
+        <circle cx="16" cy="16" r="1.4" fill="var(--color-coffee-950)"></circle>
+      </svg>
+      <span id="clock-label" class="tabular-nums"></span>
+    </button>
+  </div>
+
   <div
     id="scene-hint"
     class="pointer-events-none fixed bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-0.5 rounded-2xl bg-coffee-950/65 px-5 py-2.5 text-sm text-foam backdrop-blur-sm"
@@ -58,7 +85,10 @@ const entriesJson = JSON.stringify(summaries).replace(/</g, '\\u003c');
     <span>
       <span class="hint-fine">{t('scene.hint.scroll')}</span><span class="hint-touch">{t('scene.hint.swipe')}</span>
     </span>
-    <span class="opacity-75">{t('scene.hint.key')}</span>
+    <span class="flex items-center gap-2 opacity-90">
+      {t('scene.hint.key')}
+      <button id="hint-key" type="button" class="keycap pointer-events-auto" aria-label={t('toggle.label')} title={t('toggle.label')}>`</button>
+    </span>
     <svg class="mt-1 h-5 w-5 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
       <path d="M6 9l6 6 6-6"></path>
     </svg>
@@ -148,9 +178,9 @@ const entriesJson = JSON.stringify(summaries).replace(/</g, '\\u003c');
   <button
     id="toggle"
     type="button"
-    class="fixed right-4 bottom-4 z-20 grid h-11 w-11 place-items-center rounded-full border border-coffee-700 bg-coffee-900/90 text-xl text-crema shadow-lg backdrop-blur hover:bg-coffee-800 focus-visible:ring-2 focus-visible:ring-crema focus-visible:outline-none"
+    class="keycap keycap-lg fixed right-4 bottom-4 z-20"
     aria-label={t('toggle.label')}
-    title={t('toggle.label')}>~</button>
+    title={t('toggle.label')}>`</button>
 </div>
 
 <script id="entries-data" type="application/json" set:html={entriesJson} />

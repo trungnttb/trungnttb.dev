@@ -20,7 +20,7 @@ any part. Next: replace the placeholder model with a MagicaVoxel `.glb` (same no
 
 - **Build order:** CLI + content first (it must work without 3D and is the fallback for
   `prefers-reduced-motion` and weak devices), then the 3D scene + time-of-day lighting, then the
-  scroll / `~` transition that joins the two.
+  scroll / `` ` `` transition that joins the two.
 - **CLI is real DOM layered over the WebGL canvas.** The camera zooms until the `Screen` node fills
   the viewport, then the view crossfades to the DOM terminal. Never render the CLI as a WebGL
   texture: typing, text selection, copy, search and Shiki output all need the DOM.
@@ -37,9 +37,15 @@ any part. Next: replace the placeholder model with a MagicaVoxel `.glb` (same no
 - **Time-of-day lighting:** four presets by the viewer's local clock (05–07 dawn, 07–12 morning,
   12–18 afternoon, 18–05 night). Parameters interpolate over 30 minutes centred on each boundary;
   recompute once a minute.
-- **3D ↔ CLI switch:** desktop scroll, mobile swipe-up, the `~` key and a floating `~` button all
-  call the same zoom function. `~` always toggles, even while the CLI input is focused, so `~`
-  cannot be typed into the input (no command uses it).
+- **3D ↔ CLI switch:** desktop scroll, mobile swipe-up, the backquote key (`` ` ``, below Esc, no
+  Shift) and the on-screen keycap buttons all call the same zoom function. The key matches
+  `event.key === '`'` without modifiers, so Shift+` (`~`) does nothing. It always toggles, even
+  while the CLI input is focused, so `` ` `` cannot be typed into the input (no command uses it).
+- **Time of day:** the clock widget (top right of the scene) cycles dawn → morning → afternoon →
+  night; "Auto" follows the local clock. The choice lives in `localStorage` under
+  `portfolio.timeOfDay` (absent = auto); lighting blends over 700 ms when it changes.
+- **Scene interaction:** horizontal drag spins the overview; the spin fades to zero as the zoom
+  progresses so the camera path never cuts through the model.
 - **Routes:** `/` is the 3D scene; `/posts/<slug>` and `/notes/<slug>` are statically generated
   detail pages. Opening one from the CLI updates the URL (Back returns to the list). Opening one
   directly shows the CLI with that entry open and never loads Three.js.
@@ -82,7 +88,8 @@ src/
 
 - `scene.ts` must only be reached through the dynamic `import()` in `main.ts`, so Three.js
   (~136 KB gzip) stays out of the initial bundle and out of directly opened entry pages.
-- Dev only: `/?at=HH:MM` pins the scene clock to preview a lighting preset.
+- Model details that must not regress: every face overlay on the head sits ≥1 mm off the skull and
+  its neighbours (coplanar faces z-fight and flicker); the desk engraving text is `profile.domain`.
 
 ## Commands
 

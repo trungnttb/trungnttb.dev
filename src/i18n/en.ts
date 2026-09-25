@@ -3,9 +3,16 @@ export const en = {
 
   'scene.hint.scroll': 'Scroll down',
   'scene.hint.swipe': 'Swipe up',
-  'scene.hint.key': 'or press ~',
+  'scene.hint.key': 'or press',
   'scene.loading': 'Loading scene…',
-  'toggle.label': 'Switch between the desk and the terminal (~)',
+  'clock.label': 'Change the time of day for the lighting',
+  'clock.auto': 'Auto',
+  'clock.autoLabel': 'Follow your local time',
+  'clock.preset.dawn': 'Dawn',
+  'clock.preset.morning': 'Morning',
+  'clock.preset.afternoon': 'Afternoon',
+  'clock.preset.night': 'Night',
+  'toggle.label': 'Switch between the desk and the terminal (`)',
 
   'cli.prompt': 'guest@portfolio:~$',
   'cli.inputLabel': 'Command input',
@@ -21,7 +28,8 @@ export const en = {
   'cmd.notes': 'Standalone scripts and snippets (opens a finder)',
 
   'help.title': 'Available commands:',
-  'help.tips': 'Tips: ~ switches between the desk and this terminal · ↑/↓ recall history · Tab completes.',
+  'help.tipsLabel': 'Tips:',
+  'help.tips': 'switches between the desk and this terminal · ↑/↓ recall history · Tab completes.',
 
   'me.shares': 'Things I share:',
   'me.links': 'Find me at:',
