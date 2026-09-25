@@ -159,6 +159,7 @@ export function boot(): void {
     if (mode !== 'cli') return;
     if (!(await ensureScene())) return;
     finder.close();
+    document.querySelectorAll('dialog[open]').forEach((dialog) => (dialog as HTMLDialogElement).close());
     (document.activeElement as HTMLElement | null)?.blur();
     mode = 'scene';
     progress = target = 1;

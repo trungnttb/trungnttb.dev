@@ -55,6 +55,11 @@ export const vi: Messages = {
   'finder.loadError': 'Không tải được nội dung này.',
   'finder.openPage': 'Mở thành trang riêng',
 
+  'entry.toc': 'Trong bài này',
+  'diagram.expand': 'Xem toàn màn hình',
+  'diagram.close': 'Đóng',
+  'diagram.renderError': 'Không vẽ được diagram này.',
+
   'code.copy': 'Copy',
   'code.copied': 'Đã copy',
   'code.copyFailed': 'Copy không được',

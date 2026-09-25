@@ -35,7 +35,7 @@ const summaries: EntrySummary[] = [
 ].sort((a, b) => b.date.localeCompare(a.date));
 
 // Inline JSON must not be able to close its <script> tag.
-const entriesJson = JSON.stringify(summaries).replace(/</g, '\\u003c');
+const entriesJson = JSON.stringify(summaries).replaceAll('<', '\\u003c');
 ---
 
 <div

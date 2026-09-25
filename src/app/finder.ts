@@ -1,4 +1,5 @@
 import { locale, t } from '../i18n';
+import { enhanceArticle } from './article';
 import { h } from './dom';
 import { entryUrl, searchEntries, type CollectionName, type EntrySummary } from './entries';
 
@@ -133,6 +134,7 @@ export function createFinder({ elements: el, entries, siteTitle, onClosed }: Fin
     const cached = cache.get(url);
     if (cached) {
       el.detail.replaceChildren(cached.cloneNode(true));
+      enhanceArticle(el.detail, el.detailView);
     } else {
       el.detail.replaceChildren(h('p', { class: 'finder-status' }, t('finder.loading')));
       try {
@@ -142,7 +144,10 @@ export function createFinder({ elements: el, entries, siteTitle, onClosed }: Fin
         const article = page.querySelector('[data-entry-article]');
         if (!article) throw new Error('No [data-entry-article] in page');
         cache.set(url, article);
-        if (token === loadToken) el.detail.replaceChildren(document.importNode(article, true));
+        if (token === loadToken) {
+          el.detail.replaceChildren(document.importNode(article, true));
+          enhanceArticle(el.detail, el.detailView);
+        }
       } catch (error) {
         console.error('[finder] failed to load entry', url, error);
         if (token === loadToken) {
@@ -225,6 +230,7 @@ export function createFinder({ elements: el, entries, siteTitle, onClosed }: Fin
       history.replaceState({ view: 'entry', collection: c, id } satisfies HistoryState, '', entryUrl(entry));
       const article = el.detail.querySelector('[data-entry-article]');
       if (article) cache.set(entryUrl(entry), article.cloneNode(true) as Element);
+      enhanceArticle(el.detail, el.detailView);
       collection = c;
       el.title.textContent = t(`finder.title.${c}`);
       el.back.hidden = false;

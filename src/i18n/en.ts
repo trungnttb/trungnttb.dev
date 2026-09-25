@@ -53,6 +53,11 @@ export const en = {
   'finder.loadError': 'Could not load this entry.',
   'finder.openPage': 'Open it as a page',
 
+  'entry.toc': 'On this page',
+  'diagram.expand': 'View full screen',
+  'diagram.close': 'Close',
+  'diagram.renderError': 'Could not render this diagram.',
+
   'code.copy': 'Copy',
   'code.copied': 'Copied',
   'code.copyFailed': 'Copy failed',

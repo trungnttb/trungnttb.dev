@@ -367,6 +367,207 @@ body {
   font-size: 0.9em;
 }
 
+/* ---------- table of contents ---------- */
+
+.entry-toc {
+  display: none;
+}
+.entry-toc-compact {
+  margin-top: 1.5rem;
+  border: 1px solid var(--color-coffee-700);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+}
+.entry-toc-compact summary {
+  cursor: pointer;
+  color: var(--color-crema);
+}
+.entry-toc-compact nav {
+  margin-top: 0.5rem;
+}
+[data-toc] ol {
+  list-style: none;
+  padding: 0;
+}
+[data-toc] li {
+  line-height: 1.45;
+  padding: 0.2rem 0;
+}
+[data-toc] .toc-depth-3 {
+  padding-left: 1rem;
+  font-size: 0.92em;
+}
+[data-toc] a {
+  color: var(--color-latte);
+}
+[data-toc] a:hover,
+[data-toc] a[aria-current="true"] {
+  color: var(--color-crema);
+}
+.entry-toc-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-latte);
+  margin-bottom: 0.5rem;
+}
+@media (min-width: 1200px) {
+  .entry-with-toc {
+    max-width: 70rem;
+    display: grid;
+    grid-template-columns: minmax(0, 46rem) 15rem;
+    column-gap: 4rem;
+    justify-content: center;
+  }
+  .entry-with-toc .entry-header,
+  .entry-with-toc .entry-body {
+    grid-column: 1;
+  }
+  .entry-with-toc .entry-toc {
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: start;
+    position: sticky;
+    top: 1.5rem;
+    font-size: 0.85rem;
+    border-left: 1px solid var(--color-coffee-700);
+    padding-left: 1.25rem;
+  }
+  .entry-toc-compact {
+    display: none;
+  }
+}
+
+/* ---------- diagrams (inline SVG, .svg images, Mermaid) ---------- */
+
+.diagram {
+  position: relative;
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-coffee-700);
+  border-radius: 8px;
+  background: var(--color-coffee-900);
+  color: var(--color-foam);
+  text-align: center;
+}
+.diagram > svg,
+.diagram > img,
+.diagram-canvas svg {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+.diagram figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-latte);
+}
+.diagram-expand {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-coffee-600);
+  background: var(--color-coffee-850);
+  color: var(--color-foam);
+  cursor: pointer;
+  opacity: 0.7;
+}
+.diagram:hover .diagram-expand,
+.diagram-expand:focus-visible {
+  opacity: 1;
+}
+.diagram-expand svg,
+.diagram-dialog-close {
+  width: 1rem;
+  height: 1rem;
+}
+.diagram-expand svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+.diagram-error {
+  color: var(--color-cherry);
+  font-size: 0.85rem;
+}
+.diagram-dialog {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 3.5rem 1.5rem 1.5rem;
+  border: 0;
+  background: var(--color-coffee-950);
+  color: var(--color-foam);
+}
+.diagram-dialog::backdrop {
+  background: var(--color-coffee-950);
+}
+.diagram-dialog-body {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: auto;
+}
+.diagram-dialog-body .diagram-canvas,
+.diagram-dialog-body > svg,
+.diagram-dialog-body > img {
+  width: 100%;
+  height: 100%;
+}
+/* Fill the viewport and let the SVG's own aspect ratio letterbox it. */
+.diagram-dialog-body svg,
+.diagram-dialog-body > img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: contain;
+}
+.diagram-dialog-close {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-coffee-600);
+  background: var(--color-coffee-850);
+  color: var(--color-foam);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ---------- tables ---------- */
+
+.entry-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  display: block;
+  overflow-x: auto;
+}
+.entry-body th,
+.entry-body td {
+  border: 1px solid var(--color-coffee-700);
+  padding: 0.45rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+.entry-body th {
+  background: var(--color-coffee-850);
+  color: var(--color-crema);
+}
+
 /* ---------- code blocks (Shiki + copy) ---------- */
 
 .code-block {

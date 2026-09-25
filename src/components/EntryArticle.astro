@@ -1,25 +1,66 @@
 ---
-import { locale } from '../i18n';
+import type { MarkdownHeading } from 'astro';
+import { locale, t } from '../i18n';
 
 interface Props {
   title: string;
   date: Date;
   tags: string[];
   lang?: string;
+  headings?: MarkdownHeading[];
 }
 
-const { title, date, tags, lang } = Astro.props;
+/** Below this many sections a table of contents is noise. */
+const TOC_MIN_SECTIONS = 3;
+
+const { title, date, tags, lang, headings = [] } = Astro.props;
 const formatted = new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+const tocItems = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+const hasToc = headings.filter((heading) => heading.depth === 2).length >= TOC_MIN_SECTIONS;
 ---
 
-<article class="entry" data-entry-article>
-  <h1 class="entry-title">{title}</h1>
-  <p class="entry-meta">
-    <time datetime={date.toISOString()}>{formatted}</time>
-    {lang && <span>{lang}</span>}
-    {tags.length > 0 && <span>{tags.map((tag) => `#${tag}`).join(' ')}</span>}
-  </p>
+<article class:list={['entry', { 'entry-with-toc': hasToc }]} data-entry-article>
+  <header class="entry-header">
+    <h1 class="entry-title">{title}</h1>
+    <p class="entry-meta">
+      <time datetime={date.toISOString()}>{formatted}</time>
+      {lang && <span>{lang}</span>}
+      {tags.length > 0 && <span>{tags.map((tag) => `#${tag}`).join(' ')}</span>}
+    </p>
+  </header>
+  {
+    hasToc && (
+      <details class="entry-toc-compact">
+        <summary>{t('entry.toc')}</summary>
+        <nav data-toc>
+          <ol>
+            {tocItems.map((h) => (
+              <li class={`toc-depth-${h.depth}`}>
+                <a href={`#${h.slug}`} data-toc-link={h.slug}>{h.text}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </details>
+    )
+  }
   <div class="entry-body">
     <slot />
   </div>
+  {
+    hasToc && (
+      <aside class="entry-toc" aria-label={t('entry.toc')}>
+        <p class="entry-toc-title">{t('entry.toc')}</p>
+        <nav data-toc>
+          <ol>
+            {tocItems.map((h) => (
+              <li class={`toc-depth-${h.depth}`}>
+                <a href={`#${h.slug}`} data-toc-link={h.slug}>{h.text}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </aside>
+    )
+  }
 </article>
