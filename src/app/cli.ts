@@ -64,7 +64,10 @@ export function createCli(options: CliOptions): Cli {
         line('cli-accent', t('work.title')),
         line('', work.intro),
         line('cli-accent cli-gap-top', t('work.stack')),
-        line('cli-stack', ...work.stack.map((item) => h('span', { class: 'cli-chip' }, item)), h('span', { class: 'cli-dim' }, work.stackNote)),
+        ...work.stack.map(({ area, items }) =>
+          line('cli-stack-row', h('span', { class: 'cli-dim' }, area), h('span', { class: 'cli-stack' }, ...items.map((item) => h('span', { class: 'cli-chip' }, item)))),
+        ),
+        line('cli-dim cli-gap-top', work.stackNote),
         line('cli-accent cli-gap-top', t('work.timeline')),
         ...work.timeline.map(({ period, text }) => line('cli-timeline-row', h('span', { class: 'cli-dim' }, period), h('span', {}, text))),
       );
