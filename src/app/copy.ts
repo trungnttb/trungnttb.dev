@@ -2,7 +2,7 @@ import { t } from '../i18n';
 
 const RESET_MS = 1600;
 
-async function writeClipboard(text: string): Promise<void> {
+export async function writeClipboard(text: string): Promise<void> {
   if (navigator.clipboard && window.isSecureContext) {
     try {
       await navigator.clipboard.writeText(text);

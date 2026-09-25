@@ -51,6 +51,13 @@ any part. Next: replace the placeholder model with a MagicaVoxel `.glb` (same no
   fires `popstate` with a null state, which the router treats as "close the finder"). Mermaid
   blocks are excluded from Shiki and rendered client-side from a lazy `mermaid` chunk; inline SVG
   and `.svg` images get the same diagram frame; any diagram opens full screen in a `<dialog>`.
+- **Open Graph:** `site` is `https://trungnttb.dev`. `src/layouts/Base.astro` writes canonical, `og:*`,
+  `article:*` and `twitter:*` tags. Images are PNG 1200×630 rendered at build by satori + resvg
+  (`src/og/card.ts`) at `/og/site.png` and `/og/<collection>/<id>.png`. Each fontsource subset is
+  registered under its own family name — satori does not fall back between files sharing a name,
+  and Vietnamese diacritics silently disappear if they do.
+- **Sharing:** detail pages carry Share (Web Share API, shown only when supported), Copy link, X,
+  Facebook and LinkedIn. No Zalo button (owner's decision).
 - **Writing content:** use the project skill `.claude/skills/writing-posts` for new posts/notes.
 - **Routes:** `/` is the 3D scene; `/posts/<slug>` and `/notes/<slug>` are statically generated
   detail pages. Opening one from the CLI updates the URL (Back returns to the list). Opening one
@@ -98,6 +105,13 @@ docs/research/  research write-ups (*.raw.md), e.g. OG images and share buttons
   (~136 KB gzip) stays out of the initial bundle and out of directly opened entry pages.
 - Model details that must not regress: every face overlay on the head sits ≥1 mm off the skull and
   its neighbours (coplanar faces z-fight and flicker); the desk engraving text is `profile.domain`.
+
+## Deploy
+
+GitHub Pages via `.github/workflows/deploy.yml` on every push to `main`: `withastro/action@v6`
+installs Node 24 and the pnpm version from `packageManager`, runs `pnpm test && pnpm build`, and
+`actions/deploy-pages@v5` publishes `dist/`. `public/CNAME` holds `trungnttb.dev`. One-time setup
+outside the repo: Settings → Pages → Source "GitHub Actions", and DNS records for the domain.
 
 ## Commands
 

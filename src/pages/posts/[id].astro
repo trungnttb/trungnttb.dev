@@ -13,7 +13,7 @@ const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 ---
 
-<Base title={entry.data.title} description={entry.data.summary}>
+<Base title={entry.data.title} description={entry.data.summary} ogImage={`/og/posts/${entry.id}.png`} article={{ published: entry.data.date, tags: entry.data.tags }}>
   <AppShell entry={{ collection: 'posts', id: entry.id }}>
     <EntryArticle title={entry.data.title} date={entry.data.date} tags={entry.data.tags} headings={headings}>
       <Content />

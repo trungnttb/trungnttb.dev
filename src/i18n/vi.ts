@@ -33,6 +33,7 @@ export const vi: Messages = {
   'help.tipsLabel': 'Mẹo:',
   'help.tips': 'để chuyển giữa bàn làm việc và terminal · ↑/↓ gọi lại lệnh đã gõ · Tab để tự điền lệnh.',
 
+  'me.born': 'Sinh năm {year}',
   'me.shares': 'Vài điều muốn chia sẻ:',
   'me.links': 'Tìm tôi ở:',
 
@@ -59,6 +60,11 @@ export const vi: Messages = {
   'diagram.expand': 'Xem toàn màn hình',
   'diagram.close': 'Đóng',
   'diagram.renderError': 'Không hiển thị được diagram này.',
+
+  'share.label': 'Chia sẻ',
+  'share.copy': 'Copy link',
+  'share.copied': 'Đã copy link',
+  'share.on': 'Chia sẻ lên {network}',
 
   'code.copy': 'Copy',
   'code.copied': 'Đã copy',

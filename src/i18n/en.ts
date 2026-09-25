@@ -31,6 +31,7 @@ export const en = {
   'help.tipsLabel': 'Tips:',
   'help.tips': 'switches between the desk and this terminal · ↑/↓ recall history · Tab completes.',
 
+  'me.born': 'Born {year}',
   'me.shares': 'Things I share:',
   'me.links': 'Find me at:',
 
@@ -57,6 +58,11 @@ export const en = {
   'diagram.expand': 'View full screen',
   'diagram.close': 'Close',
   'diagram.renderError': 'Could not render this diagram.',
+
+  'share.label': 'Share',
+  'share.copy': 'Copy link',
+  'share.copied': 'Link copied',
+  'share.on': 'Share on {network}',
 
   'code.copy': 'Copy',
   'code.copied': 'Copied',

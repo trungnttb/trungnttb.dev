@@ -15,6 +15,12 @@ const TOC_MIN_SECTIONS = 3;
 
 const { title, date, tags, lang, headings = [] } = Astro.props;
 const formatted = new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const shareTargets = [
+  { network: 'X', href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(title)}` },
+  { network: 'Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}` },
+  { network: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}` },
+];
 const tocItems = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 const hasToc = headings.filter((heading) => heading.depth === 2).length >= TOC_MIN_SECTIONS;
 ---
@@ -27,6 +33,17 @@ const hasToc = headings.filter((heading) => heading.depth === 2).length >= TOC_M
       {lang && <span>{lang}</span>}
       {tags.length > 0 && <span>{tags.map((tag) => `#${tag}`).join(' ')}</span>}
     </p>
+    <div class="entry-share" data-share-url={pageUrl} data-share-title={title}>
+      <button type="button" class="share-button" data-share-native hidden>{t('share.label')}</button>
+      <button type="button" class="share-button" data-share-copy>{t('share.copy')}</button>
+      {
+        shareTargets.map(({ network, href }) => (
+          <a class="share-button" href={href} target="_blank" rel="noopener noreferrer" aria-label={t('share.on', { network })}>
+            {network}
+          </a>
+        ))
+      }
+    </div>
   </header>
   {
     hasToc && (

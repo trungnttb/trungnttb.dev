@@ -1,10 +1,12 @@
 // Owner-written content: shown as written, never passed through i18n.
-// Placeholder values below — replace them with your own.
+// Bio, shares and links below are still placeholders — replace them with your own.
 
 export interface Profile {
   siteTitle: string;
   /** Engraved on the desk in the 3D scene. */
   domain: string;
+  birthYear: number;
+  email: string;
   greeting: string;
   name: string;
   role: string;
@@ -14,10 +16,12 @@ export interface Profile {
 }
 
 export const profile: Profile = {
-  siteTitle: 'portfolio',
+  siteTitle: 'trungnttb.dev',
   domain: 'trungnttb.dev',
   greeting: 'Hi there, thanks for stopping by.',
-  name: 'Your Name',
+  name: 'Nguyễn Thành Trung',
+  birthYear: 1993,
+  email: 'trungnttb.dev@gmail.com',
   role: 'Software Engineer',
   bio: [
     'I build web applications end to end, from the database schema to the pixels.',
@@ -29,6 +33,6 @@ export const profile: Profile = {
   ],
   links: [
     { label: 'GitHub', url: 'https://github.com/' },
-    { label: 'Email', url: 'mailto:you@example.com' },
+    { label: 'Email', url: 'mailto:trungnttb.dev@gmail.com' },
   ],
 };

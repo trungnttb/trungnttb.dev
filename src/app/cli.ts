@@ -48,6 +48,7 @@ export function createCli(options: CliOptions): Cli {
         line('cli-accent', profile.greeting),
         line('cli-name', profile.name),
         line('cli-role', profile.role),
+        line('cli-dim', t('me.born', { year: profile.birthYear }), ' · ', h('a', { href: `mailto:${profile.email}` }, profile.email)),
         ...profile.bio.map((text) => line('cli-gap-top', text)),
         line('cli-accent cli-gap-top', t('me.shares')),
         ...profile.shares.map((text) => line('cli-bullet', text)),

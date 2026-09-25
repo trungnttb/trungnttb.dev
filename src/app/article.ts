@@ -1,4 +1,5 @@
 import { t } from '../i18n';
+import { writeClipboard } from './copy';
 import { h } from './dom';
 
 const ACTIVE_OFFSET_PX = 96;
@@ -16,9 +17,48 @@ export function enhanceArticle(container: HTMLElement, scrollRoot: HTMLElement):
   const article = container.querySelector<HTMLElement>('[data-entry-article]');
   if (!article) return;
 
+  setUpShare(article, signal);
   setUpToc(article, scrollRoot, signal);
   wrapSvgDiagrams(article);
   void renderMermaid(article);
+}
+
+const SHARE_RESET_MS = 1600;
+
+function setUpShare(article: HTMLElement, signal: AbortSignal): void {
+  const bar = article.querySelector<HTMLElement>('.entry-share');
+  if (!bar) return;
+  const url = bar.dataset.shareUrl!;
+  const title = bar.dataset.shareTitle!;
+  const native = bar.querySelector<HTMLButtonElement>('[data-share-native]');
+  if (native && typeof navigator.share === 'function') native.hidden = false;
+
+  bar.addEventListener(
+    'click',
+    async (event) => {
+      const target = event.target as HTMLElement;
+      if (target.closest('[data-share-native]')) {
+        try {
+          await navigator.share({ title, url });
+        } catch (error) {
+          // AbortError means the viewer closed the share sheet; anything else is worth logging.
+          if ((error as DOMException).name !== 'AbortError') console.error('[share] failed', error);
+        }
+        return;
+      }
+      const copy = target.closest<HTMLButtonElement>('[data-share-copy]');
+      if (!copy) return;
+      try {
+        await writeClipboard(url);
+        copy.textContent = t('share.copied');
+      } catch (error) {
+        console.error('[share] copy failed', error);
+        copy.textContent = t('code.copyFailed');
+      }
+      window.setTimeout(() => (copy.textContent = t('share.copy')), SHARE_RESET_MS);
+    },
+    { signal },
+  );
 }
 
 function setUpToc(article: HTMLElement, scrollRoot: HTMLElement, signal: AbortSignal): void {

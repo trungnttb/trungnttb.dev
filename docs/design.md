@@ -154,7 +154,17 @@ Rút ra từ các điểm trên, chưa kiểm chứng thêm:
 - **Thanh tiêu đề của Finder:** nút "Quay lại danh sách" to, nằm bên phải, kèm gợi ý phím Esc. Ba nút kiểu macOS: đỏ để đóng, xanh để phóng cửa sổ tràn màn hình; nút vàng để màu xám vì chức năng thu nhỏ ở đây cũng chỉ là đóng, trùng với nút đỏ.
 - **Mục lục (TOC):** tự sinh khi bài có từ 3 heading `##` trở lên. Màn hình rộng ≥1200px thì mục lục là một cột bên phải, đi theo khi cuộn; màn hình hẹp hơn thì là một khối gập/mở ở đầu bài. Bài mẫu dài để tham khảo: `src/content/posts/jev-system-one-model.md`.
 - **Diagram:** hỗ trợ khối Mermaid (render trên trình duyệt, chỉ tải thư viện khi bài có diagram) và SVG (viết trực tiếp trong `<figure>`, hoặc ảnh `.svg`). Mọi diagram đều có nút xem toàn màn hình.
-- **OG image và nút chia sẻ:** mới nghiên cứu, chưa làm. Xem `docs/research/og-images-and-sharing.raw.md`.
+- **OG image và nút chia sẻ:** xem D12.
+
+### D12 — OG image, nút chia sẻ, deploy (2026-09-25)
+
+- **Chốt (người dùng):** dùng satori; domain là `trungnttb.dev`; bỏ Zalo; deploy lên GitHub Pages.
+- **OG image:** sinh lúc build, kích thước 1200×630. Mỗi post/note có một ảnh ở `/og/<collection>/<id>.png`, trang chủ dùng `/og/site.png`. Ảnh gồm logo, domain, tiêu đề (tối đa 3 dòng), tóm tắt (tối đa 2 dòng), ngày, tag và tên tác giả. Font là JetBrains Mono; mỗi subset được đăng ký dưới một tên riêng, nếu không ảnh sẽ mất các chữ có dấu.
+- **Thẻ meta:** canonical, `og:*`, `article:*`, `twitter:card=summary_large_image`. Không khai báo `og:locale`, vì ngôn ngữ UI không phải lúc nào cũng trùng ngôn ngữ của bài viết.
+- **Nút chia sẻ:** Chia sẻ (Web Share API, chỉ hiện khi trình duyệt hỗ trợ), Copy link, X, Facebook, LinkedIn.
+- **Deploy:** GitHub Actions deploy lên GitHub Pages mỗi khi push lên `main`. Unit test phải qua thì mới deploy.
+- **Thông tin chủ site:** Nguyễn Thành Trung, sinh năm 1993, email trungnttb.dev@gmail.com.
+- **Xem lại khi:** cần ảnh OG riêng cho một bài (chèn ảnh tự chọn thay cho ảnh sinh tự động), hoặc khi đổi nơi host.
 
 ## 5. Quy ước giữa code và file model
 

@@ -230,6 +230,13 @@ Bộ thẻ đề xuất cho mỗi trang chi tiết (`inferred`, chưa build th�
 | Cắt 15px mỗi cạnh khi X hiển thị ảnh 1200×630 theo 2:1 | (630 − 1200/2) / 2 | 2026-09-25 | inferred |
 | Trang được build: 7 | `pnpm build` ("7 page(s) built") | 2026-09-25 | ran |
 
+## Kết quả sau nghiên cứu (2026-09-25)
+
+Chủ site đã chọn phương án A, xác nhận domain `https://trungnttb.dev` và bỏ Zalo. Đã triển khai
+(`ran`: `pnpm build` sinh 7 ảnh 1200×630; ảnh đầu 1,14 s, các ảnh sau 81–95 ms; mở ảnh kiểm bằng
+mắt thấy đủ dấu tiếng Việt). Các mục `verify` về X, Facebook và LinkedIn vẫn còn nguyên, cho tới khi
+kiểm bằng URL đã deploy.
+
 ## Still to do
 
 | Người làm | Việc | Vì sao đang chặn |

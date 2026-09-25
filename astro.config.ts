@@ -4,6 +4,7 @@ import { codeBlockTransformer } from './src/app/code-block-transformer';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://trungnttb.dev',
   markdown: {
     // Mermaid blocks stay as plain code so the client can render them as diagrams.
     syntaxHighlight: { type: 'shiki', excludeLangs: ['mermaid', 'math'] },
