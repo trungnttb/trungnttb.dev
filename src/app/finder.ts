@@ -13,6 +13,7 @@ export interface FinderElements {
   search: HTMLInputElement;
   back: HTMLButtonElement;
   close: HTMLButtonElement;
+  maximize: HTMLButtonElement;
   listView: HTMLElement;
   rows: HTMLElement;
   count: HTMLElement;
@@ -202,6 +203,10 @@ export function createFinder({ elements: el, entries, siteTitle, onClosed }: Fin
   });
   el.back.addEventListener('click', backToList);
   el.close.addEventListener('click', close);
+  el.maximize.addEventListener('click', () => {
+    const maximized = el.root.toggleAttribute('data-maximized');
+    el.maximize.setAttribute('aria-pressed', String(maximized));
+  });
   el.root.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
     event.preventDefault();

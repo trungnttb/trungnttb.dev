@@ -162,6 +162,48 @@ body {
 
 /* ---------- finder ---------- */
 
+.traffic {
+  display: grid;
+  place-items: center;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 9999px;
+}
+.traffic svg {
+  width: 0.55rem;
+  height: 0.55rem;
+  fill: none;
+  stroke: rgb(0 0 0 / 0.6);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0;
+}
+/* Like macOS: glyphs appear on all buttons while the pointer is over the group. */
+.traffic-lights:hover .traffic svg,
+.traffic:focus-visible svg {
+  opacity: 1;
+}
+.traffic:focus-visible {
+  outline: 2px solid var(--color-crema);
+  outline-offset: 2px;
+}
+.traffic-close {
+  background: #ff5f57;
+  cursor: pointer;
+}
+.traffic-maximize {
+  background: #28c840;
+  cursor: pointer;
+}
+/* Minimise would only close the window, same as the red button, so it is shown inactive. */
+.traffic-idle {
+  background: var(--color-coffee-600);
+}
+[data-maximized] .finder-window {
+  border-radius: 0;
+  border-width: 0;
+}
+
 .finder-open #cli-scroll {
   overflow: hidden;
 }

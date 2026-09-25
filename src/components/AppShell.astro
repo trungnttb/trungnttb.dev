@@ -121,31 +121,23 @@ const entriesJson = JSON.stringify(summaries).replace(/</g, '\\u003c');
 
   <div
     id="finder"
-    class="fixed inset-0 z-10 flex bg-coffee-950/70 p-0 backdrop-blur-sm sm:p-6"
+    class="fixed inset-0 z-10 flex bg-coffee-950/70 p-0 backdrop-blur-sm sm:p-6 data-maximized:sm:p-0"
     role="dialog"
     aria-modal="true"
     aria-labelledby="finder-title"
     hidden={!entry}
   >
-    <div class="flex min-h-0 flex-1 flex-col overflow-hidden border-coffee-700 bg-coffee-900 shadow-2xl sm:rounded-xl sm:border">
+    <div class="finder-window flex min-h-0 flex-1 flex-col overflow-hidden border-coffee-700 bg-coffee-900 shadow-2xl sm:rounded-xl sm:border">
       <header class="flex items-center gap-3 border-b border-coffee-700 bg-coffee-850 px-4 py-2.5">
-        <div class="flex items-center gap-2">
-          <button
-            id="finder-close"
-            type="button"
-            class="h-3.5 w-3.5 rounded-full bg-cherry ring-offset-2 ring-offset-coffee-850 focus-visible:ring-2 focus-visible:ring-crema focus-visible:outline-none"
-            aria-label={t('finder.close')}
-            title={t('finder.close')}></button>
-          <span class="h-3.5 w-3.5 rounded-full bg-crema" aria-hidden="true"></span>
-          <span class="h-3.5 w-3.5 rounded-full bg-matcha" aria-hidden="true"></span>
+        <div class="traffic-lights flex items-center gap-2">
+          <button id="finder-close" type="button" class="traffic traffic-close" aria-label={t('finder.close')} title={t('finder.close')}>
+            <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"></path></svg>
+          </button>
+          <span class="traffic traffic-idle" aria-hidden="true"></span>
+          <button id="finder-maximize" type="button" class="traffic traffic-maximize" aria-label={t('finder.maximize')} title={t('finder.maximize')} aria-pressed="false">
+            <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 2v6M2 5h6"></path></svg>
+          </button>
         </div>
-        <button
-          id="finder-back"
-          type="button"
-          class="rounded px-2 py-0.5 text-lg leading-none text-foam hover:bg-coffee-800 focus-visible:bg-coffee-800 focus-visible:outline-none"
-          aria-label={t('finder.back')}
-          title={t('finder.back')}
-          hidden={!entry}>‹</button>
         <h2 id="finder-title" class="shrink-0 font-bold text-foam">
           {entry ? t(`finder.title.${entry.collection}`) : ''}
         </h2>
@@ -157,6 +149,16 @@ const entriesJson = JSON.stringify(summaries).replace(/</g, '\\u003c');
           spellcheck="false"
           hidden={!!entry}
         />
+        <button
+          id="finder-back"
+          type="button"
+          class="ml-auto flex items-center gap-2 rounded-lg border border-coffee-600 bg-coffee-800 px-4 py-1.5 text-sm text-crema hover:border-crema hover:bg-coffee-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crema"
+          hidden={!entry}
+        >
+          <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3L5 8l5 5"></path></svg>
+          <span>{t('finder.back')}</span>
+          <kbd class="hidden rounded border border-coffee-600 px-1.5 text-[0.7rem] text-latte sm:inline">Esc</kbd>
+        </button>
       </header>
 
       <div id="finder-list-view" class="flex min-h-0 flex-1 flex-col" hidden={!!entry}>

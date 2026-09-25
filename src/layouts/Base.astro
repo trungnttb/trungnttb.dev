@@ -19,7 +19,10 @@ const pageTitle = title ? `${title} · ${profile.siteTitle}` : profile.siteTitle
     <meta name="description" content={description} />
     <meta name="theme-color" content="#1b1411" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <title>{pageTitle}</title>
   </head>
   <body>

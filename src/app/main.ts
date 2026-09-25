@@ -57,6 +57,7 @@ export function boot(): void {
       search: byId<HTMLInputElement>('finder-search'),
       back: byId<HTMLButtonElement>('finder-back'),
       close: byId<HTMLButtonElement>('finder-close'),
+      maximize: byId<HTMLButtonElement>('finder-maximize'),
       listView: byId('finder-list-view'),
       rows: byId('finder-rows'),
       count: byId('finder-count'),

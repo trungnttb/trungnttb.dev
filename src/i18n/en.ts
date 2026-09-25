@@ -48,6 +48,7 @@ export const en = {
   'finder.empty': 'Nothing matches “{query}”.',
   'finder.close': 'Close',
   'finder.back': 'Back to list',
+  'finder.maximize': 'Full size window',
   'finder.loading': 'Loading…',
   'finder.loadError': 'Could not load this entry.',
   'finder.openPage': 'Open it as a page',

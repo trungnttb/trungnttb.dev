@@ -50,6 +50,7 @@ export const vi: Messages = {
   'finder.empty': 'Không có mục nào khớp với “{query}”.',
   'finder.close': 'Đóng',
   'finder.back': 'Quay lại danh sách',
+  'finder.maximize': 'Phóng to cửa sổ',
   'finder.loading': 'Đang tải…',
   'finder.loadError': 'Không tải được nội dung này.',
   'finder.openPage': 'Mở thành trang riêng',
