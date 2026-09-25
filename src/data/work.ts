@@ -14,11 +14,11 @@ export const work: Work = {
     'Full-stack web developer since 2014: React and Next.js in front, NestJS or Spring behind it, ' +
     'a database underneath, Docker and Jenkins to ship it, AWS to run it.',
   stack: [
-    { area: 'Frontend', items: ['React', 'Next.js'] },
-    { area: 'Backend', items: ['NestJS', 'Java Spring'] },
+    { area: 'How I work', items: ['AI First (Claude)', 'SDLC — built it, then followed it'] },
+    { area: 'Frontend', items: ['React', 'Next.js', 'Vue', 'Angular', 'TypeScript', 'other JS-based frameworks'] },
+    { area: 'Backend', items: ['NestJS', 'Java Spring Boot', 'Node.js'] },
     { area: 'Data', items: ['PostgreSQL', 'MySQL', 'Oracle', 'MongoDB', 'Redis'] },
     { area: 'Ship & run', items: ['Docker', 'Jenkins CI/CD', 'AWS'] },
-    { area: 'How I work', items: ['AI First (Claude)', 'SDLC — built it, then followed it'] },
   ],
   stackNote: 'and more — since Claude joined the team, “I have heard of it” turns into “it is in review” a lot faster.',
   timeline: [

@@ -7,8 +7,10 @@ export const GET: APIRoute = async () => {
   const png = await renderOgPng({
     kicker: '~$',
     title: profile.name,
-    // Frontend + backend items keep the line short enough for the card's two-line clamp.
-    summary: `${profile.role} · ${work.stack.slice(0, 2).flatMap((group) => group.items).join(', ')} · AI-first`,
+    // The first two items of each named area keep the line inside the card's two-line clamp.
+    summary: `${profile.role} · ${['Frontend', 'Backend']
+      .flatMap((area) => work.stack.find((group) => group.area === area)?.items.slice(0, 2) ?? [])
+      .join(', ')} · AI-first`,
     meta: '/help  /me  /work  /posts  /notes',
     byline: profile.domain,
     domain: profile.domain,
