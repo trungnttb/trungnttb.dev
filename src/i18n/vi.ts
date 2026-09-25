@@ -16,7 +16,7 @@ export const vi: Messages = {
   'clock.preset.night': 'Buổi tối',
   'toggle.label': 'Chuyển giữa bàn làm việc và terminal (`)',
 
-  'cli.prompt': 'guest@portfolio:~$',
+  'cli.prompt': 'trungnttb@portfolio:~$',
   'cli.inputLabel': 'Ô nhập lệnh',
   'cli.commandsLabel': 'Các lệnh',
   'cli.welcome': 'Xin chào. Gõ một lệnh, hoặc bấm vào lệnh trên thanh phía trên.',

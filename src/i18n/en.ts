@@ -14,7 +14,7 @@ export const en = {
   'clock.preset.night': 'Night',
   'toggle.label': 'Switch between the desk and the terminal (`)',
 
-  'cli.prompt': 'guest@portfolio:~$',
+  'cli.prompt': 'trungnttb@portfolio:~$',
   'cli.inputLabel': 'Command input',
   'cli.commandsLabel': 'Commands',
   'cli.welcome': 'Welcome. Type a command, or click one in the bar above.',
