@@ -1,5 +1,5 @@
 import { profile } from '../data/profile';
-import { projects } from '../data/projects';
+import { work } from '../data/work';
 import { t, type MessageKey } from '../i18n';
 import { COMMANDS, completeInput, History, parseInput, type CommandName } from './commands';
 import { h } from './dom';
@@ -59,19 +59,15 @@ export function createCli(options: CliOptions): Cli {
         ),
       );
     },
-    projects() {
-      if (projects.length === 0) return print(line('cli-dim', t('projects.empty')));
-      print(line('cli-accent', t('projects.title')));
-      for (const project of projects) {
-        const title = project.url
-          ? h('a', { href: project.url, target: '_blank', rel: 'noopener noreferrer' }, project.name)
-          : h('span', {}, project.name);
-        print(
-          line('cli-project cli-gap-top', title, h('span', { class: 'cli-dim' }, ` (${project.year})`)),
-          line('cli-indent', project.description),
-          line('cli-indent cli-dim', project.stack.join(' · ')),
-        );
-      }
+    work() {
+      print(
+        line('cli-accent', t('work.title')),
+        line('', work.intro),
+        line('cli-accent cli-gap-top', t('work.stack')),
+        line('cli-stack', ...work.stack.map((item) => h('span', { class: 'cli-chip' }, item)), h('span', { class: 'cli-dim' }, work.stackNote)),
+        line('cli-accent cli-gap-top', t('work.timeline')),
+        ...work.timeline.map(({ period, text }) => line('cli-timeline-row', h('span', { class: 'cli-dim' }, period), h('span', {}, text))),
+      );
     },
     posts: () => openCollection('posts'),
     notes: () => openCollection('notes'),

@@ -7,7 +7,7 @@ export const GET: APIRoute = async () => {
     kicker: '~$',
     title: profile.name,
     summary: `${profile.role}. ${profile.bio[0] ?? ''}`,
-    meta: '/help  /me  /projects  /posts  /notes',
+    meta: '/help  /me  /work  /posts  /notes',
     byline: profile.domain,
     domain: profile.domain,
   });

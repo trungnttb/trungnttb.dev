@@ -130,6 +130,31 @@ body {
   grid-template-columns: 12ch 1fr;
   gap: 1ch;
 }
+.cli-stack {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+.cli-chip {
+  padding: 0 0.6rem;
+  border: 1px solid var(--color-coffee-600);
+  border-radius: 4px;
+  color: var(--color-foam);
+}
+.cli-timeline-row {
+  display: grid;
+  grid-template-columns: 17ch 1fr;
+  gap: 1ch;
+}
+@media (max-width: 640px) {
+  .cli-timeline-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 0.35rem;
+  }
+}
 .cli-links {
   display: flex;
   flex-wrap: wrap;

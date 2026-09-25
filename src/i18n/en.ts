@@ -23,7 +23,7 @@ export const en = {
 
   'cmd.help': 'List every command',
   'cmd.me': 'Who I am, what I do',
-  'cmd.projects': 'Projects I have built',
+  'cmd.work': 'What I work with, and where I have worked',
   'cmd.posts': 'Long-form articles (opens a finder)',
   'cmd.notes': 'Standalone scripts and snippets (opens a finder)',
 
@@ -35,8 +35,9 @@ export const en = {
   'me.shares': 'Things I share:',
   'me.links': 'Find me at:',
 
-  'projects.title': 'Projects:',
-  'projects.empty': 'No projects yet.',
+  'work.title': 'Work:',
+  'work.stack': 'Stack:',
+  'work.timeline': 'Timeline:',
 
   'finder.opening': 'Opening {collection}…',
   'finder.title.posts': 'Posts',

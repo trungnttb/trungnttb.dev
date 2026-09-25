@@ -25,7 +25,7 @@ export const vi: Messages = {
 
   'cmd.help': 'Liệt kê tất cả các lệnh',
   'cmd.me': 'Giới thiệu bản thân và công việc',
-  'cmd.projects': 'Các project đã làm',
+  'cmd.work': 'Công nghệ đang dùng và những nơi đã làm việc',
   'cmd.posts': 'Bài viết dài (mở cửa sổ danh sách)',
   'cmd.notes': 'Script và đoạn code dùng độc lập (mở cửa sổ danh sách)',
 
@@ -37,8 +37,9 @@ export const vi: Messages = {
   'me.shares': 'Vài điều muốn chia sẻ:',
   'me.links': 'Tìm tôi ở:',
 
-  'projects.title': 'Các project:',
-  'projects.empty': 'Chưa có project nào.',
+  'work.title': 'Công việc:',
+  'work.stack': 'Công nghệ:',
+  'work.timeline': 'Quá trình làm việc:',
 
   'finder.opening': 'Đang mở {collection}…',
   'finder.title.posts': 'Bài viết',

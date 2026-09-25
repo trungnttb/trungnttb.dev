@@ -16,11 +16,12 @@ describe('parseInput', () => {
 
 describe('completeInput', () => {
   it('completes a unique prefix', () => {
-    expect(completeInput('/pr')).toBe('/projects');
+    expect(completeInput('/w')).toBe('/work');
+    expect(completeInput('/po')).toBe('/posts');
     expect(completeInput('n')).toBe('/notes');
   });
   it('returns null when ambiguous or unmatched', () => {
-    expect(completeInput('/p')).toBeNull();
+    expect(completeInput('/')).toBeNull();
     expect(completeInput('/x')).toBeNull();
   });
 });

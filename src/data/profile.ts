@@ -22,7 +22,7 @@ export const profile: Profile = {
   name: 'Nguyễn Thành Trung',
   birthYear: 1993,
   email: 'trungnttb.dev@gmail.com',
-  role: 'Software Engineer',
+  role: 'Full-stack Web Developer',
   bio: [
     'I build web applications end to end, from the database schema to the pixels.',
     'Most days that means TypeScript, a strong coffee, and a terminal like this one.',

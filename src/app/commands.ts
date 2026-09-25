@@ -1,4 +1,4 @@
-export const COMMANDS = ['help', 'me', 'projects', 'posts', 'notes'] as const;
+export const COMMANDS = ['help', 'me', 'work', 'posts', 'notes'] as const;
 export type CommandName = (typeof COMMANDS)[number];
 
 export type ParsedInput =

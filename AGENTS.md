@@ -2,7 +2,7 @@
 
 Personal portfolio site. A fullscreen 3D home scene (a developer at a desk with a MacBook and a coffee
 mug, lit according to the viewer's local time) zooms into the laptop screen, which becomes a
-CLI-style interface for `/help`, `/me`, `/projects`, `/posts`, `/notes`.
+CLI-style interface for `/help`, `/me`, `/work`, `/posts`, `/notes`.
 
 ## Status
 
@@ -95,7 +95,7 @@ src/
   components/   AppShell.astro (all DOM for scene/CLI/finder), EntryArticle.astro
   pages/        index.astro, posts/[id].astro, notes/[id].astro
   content/      posts/*.md, notes/*.md (schemas in src/content.config.ts)
-  data/         profile.ts, projects.ts — owner content shown by /me and /projects
+  data/         profile.ts, work.ts — owner content shown by /me and /work
 brand/          logo SVG sources; `pnpm brand` renders public/brand/*.png, favicon.ico, apple-touch-icon
 docs/research/  research write-ups (*.raw.md), e.g. OG images and share buttons
   i18n/         en.ts (source of keys), vi.ts; `locale` in index.ts picks the UI language
