@@ -76,7 +76,7 @@ thể trả về một lựa chọn không có trong danh sách. Cần hiểu đ
 
 Mọi thứ Jev trả lời đều thuộc một trong ba loại, TypeSafe gọi chúng là *primitive*:
 
-### Noul: đúng hay sai
+### Noul: câu hỏi đúng/sai
 
 `noul` là xác suất từ 0 đến 1 cho một mệnh đề đúng/sai, ví dụ "tin nhắn này có yêu cầu hoàn tiền
 không?". Response chỉ có một con số.

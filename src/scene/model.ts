@@ -9,7 +9,7 @@ import * as THREE from 'three';
  * - `Lamp` (optional): holds the night lamp's PointLight.
  */
 
-export const SCREEN_COLOR = '#1b1411';
+export const SCREEN_COLOR = '#1a1110';
 
 const palette = {
   floor: '#6b4a36',

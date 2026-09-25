@@ -8,8 +8,8 @@ export const GET: APIRoute = () =>
       short_name: profile.siteTitle,
       start_url: '/',
       display: 'standalone',
-      background_color: '#1b1411',
-      theme_color: '#1b1411',
+      background_color: '#1a1110',
+      theme_color: '#1a1110',
       icons: [
         { src: '/brand/logo-192.png', sizes: '192x192', type: 'image/png' },
         { src: '/brand/logo-512.png', sizes: '512x512', type: 'image/png' },

@@ -46,6 +46,12 @@ any part. Next: replace the placeholder model with a MagicaVoxel `.glb` (same no
   `portfolio.timeOfDay` (absent = auto); lighting blends over 700 ms when it changes.
 - **Scene interaction:** horizontal drag spins the overview; the spin fades to zero as the zoom
   progresses so the camera path never cuts through the model.
+- **Articles:** a table of contents is generated when a post has 3+ `##` headings (sticky column
+  ≥1200px, collapsible otherwise); TOC links scroll with JS and never set `#hash` (a hash change
+  fires `popstate` with a null state, which the router treats as "close the finder"). Mermaid
+  blocks are excluded from Shiki and rendered client-side from a lazy `mermaid` chunk; inline SVG
+  and `.svg` images get the same diagram frame; any diagram opens full screen in a `<dialog>`.
+- **Writing content:** use the project skill `.claude/skills/writing-posts` for new posts/notes.
 - **Routes:** `/` is the 3D scene; `/posts/<slug>` and `/notes/<slug>` are statically generated
   detail pages. Opening one from the CLI updates the URL (Back returns to the list). Opening one
   directly shows the CLI with that entry open and never loads Three.js.
@@ -83,6 +89,8 @@ src/
   pages/        index.astro, posts/[id].astro, notes/[id].astro
   content/      posts/*.md, notes/*.md (schemas in src/content.config.ts)
   data/         profile.ts, projects.ts — owner content shown by /me and /projects
+brand/          logo SVG sources; `pnpm brand` renders public/brand/*.png, favicon.ico, apple-touch-icon
+docs/research/  research write-ups (*.raw.md), e.g. OG images and share buttons
   i18n/         en.ts (source of keys), vi.ts; `locale` in index.ts picks the UI language
 ```
 
@@ -99,6 +107,7 @@ pnpm dev         # dev server
 pnpm test        # vitest: pure logic (commands, search, lighting, framing)
 pnpm check       # astro check: types in .ts and .astro
 pnpm build       # static build to dist/
+pnpm brand       # re-render logo PNGs/ICO from brand/*.svg (uses sharp)
 pnpm preview     # serve dist/
 ```
 - pnpm blocks dependency build scripts unless listed under `allowBuilds` in `pnpm-workspace.yaml`.

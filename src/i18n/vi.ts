@@ -58,7 +58,7 @@ export const vi: Messages = {
   'entry.toc': 'Trong bài này',
   'diagram.expand': 'Xem toàn màn hình',
   'diagram.close': 'Đóng',
-  'diagram.renderError': 'Không vẽ được diagram này.',
+  'diagram.renderError': 'Không hiển thị được diagram này.',
 
   'code.copy': 'Copy',
   'code.copied': 'Đã copy',

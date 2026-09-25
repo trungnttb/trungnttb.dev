@@ -148,6 +148,14 @@ Rút ra từ các điểm trên, chưa kiểm chứng thêm:
 - **Tóc nhấp nháy:** đây là z-fighting, do vài mặt của các khối tóc nằm trùng mặt phẳng với mặt đầu. Đã dựng lại đầu sao cho mọi mặt lệch nhau ít nhất khoảng 1 mm.
 - **Góc nhìn mặc định** vẫn là từ sau lưng chếch bên phải, để thấy màn hình laptop. Mặt nhân vật chỉ thấy rõ khi kéo xoay.
 
+### D11 — Logo, trang chi tiết, bài dài và diagram (2026-09-25)
+
+- **Logo:** favicon được dùng làm logo. File gốc nằm ở `brand/`. Lệnh `pnpm brand` sinh ra `public/brand/` gồm icon 16–1024px, bản mark nền trong suốt cho nền tối và nền sáng, và bản maskable cho Android; đồng thời sinh `favicon.ico` và `apple-touch-icon.png`.
+- **Thanh tiêu đề của Finder:** nút "Quay lại danh sách" to, nằm bên phải, kèm gợi ý phím Esc. Ba nút kiểu macOS: đỏ để đóng, xanh để phóng cửa sổ tràn màn hình; nút vàng để màu xám vì chức năng thu nhỏ ở đây cũng chỉ là đóng, trùng với nút đỏ.
+- **Mục lục (TOC):** tự sinh khi bài có từ 3 heading `##` trở lên. Màn hình rộng ≥1200px thì mục lục là một cột bên phải, đi theo khi cuộn; màn hình hẹp hơn thì là một khối gập/mở ở đầu bài. Bài mẫu dài để tham khảo: `src/content/posts/jev-system-one-model.md`.
+- **Diagram:** hỗ trợ khối Mermaid (render trên trình duyệt, chỉ tải thư viện khi bài có diagram) và SVG (viết trực tiếp trong `<figure>`, hoặc ảnh `.svg`). Mọi diagram đều có nút xem toàn màn hình.
+- **OG image và nút chia sẻ:** mới nghiên cứu, chưa làm. Xem `docs/research/og-images-and-sharing.raw.md`.
+
 ## 5. Quy ước giữa code và file model
 
 Code camera, zoom và ánh sáng chỉ làm việc với các node có tên cố định dưới đây. Nhờ vậy, đổi model tạm bằng code sang file `.glb` chỉ là thay file.
