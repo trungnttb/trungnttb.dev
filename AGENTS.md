@@ -6,8 +6,8 @@ CLI-style interface for `/help`, `/me`, `/projects`, `/posts`, `/notes`.
 
 ## Status
 
-Scaffolded (Astro + Tailwind), no feature code yet. The design and every decision (D1–D8) live in `docs/design.md`; read it before starting
-any part. All three parts are decided; build them in the order below, starting with part 1.
+All three parts are implemented with a code-built placeholder model (D1 phase B). The design and every decision (D1–D8) live in `docs/design.md`; read it before starting
+any part. Next: replace the placeholder model with a MagicaVoxel `.glb` (same node names) and real content.
 
 ## Stack
 
@@ -50,6 +50,7 @@ any part. All three parts are decided; build them in the order below, starting w
 - Package manager: **pnpm** (12.6.0 at 2026-09-25), recorded in `package.json` `packageManager`.
   Never use npm or yarn to install.
 - Tailwind: stay on the **4.3.x** line (owner's choice); ask before moving to 4.4.
+- TypeScript: **6.x**, not 7 — `@astrojs/check` peers on `typescript ^5 || ^6`. Move to 7 when it does.
 - Every other dependency: the npm `latest` dist-tag, i.e. newest stable. Never `alpha` / `beta` /
   `rc` / `next`, and never Tailwind's `v3-lts` tag (an old maintained branch, not the newest).
 - Install with `pnpm add <pkg>@latest`, commit the lockfile. Major upgrades are their own change,
@@ -64,15 +65,35 @@ any part. All three parts are decided; build them in the order below, starting w
   only the UI around it switches language.
 - Comments record constraints the code cannot state by itself, not change history.
 
+## Layout
+
+```
+src/
+  app/          client code: main.ts (boot + 3D↔CLI controller), cli.ts, finder.ts, copy.ts,
+                pure logic with tests (commands.ts, entries.ts), Shiki code-block transformer
+  scene/        Three.js: scene.ts (lazy-loaded chunk), model.ts (placeholder workspace),
+                lighting.ts + framing.ts (pure, tested)
+  components/   AppShell.astro (all DOM for scene/CLI/finder), EntryArticle.astro
+  pages/        index.astro, posts/[id].astro, notes/[id].astro
+  content/      posts/*.md, notes/*.md (schemas in src/content.config.ts)
+  data/         profile.ts, projects.ts — owner content shown by /me and /projects
+  i18n/         en.ts (source of keys), vi.ts; `locale` in index.ts picks the UI language
+```
+
+- `scene.ts` must only be reached through the dynamic `import()` in `main.ts`, so Three.js
+  (~136 KB gzip) stays out of the initial bundle and out of directly opened entry pages.
+- Dev only: `/?at=HH:MM` pins the scene clock to preview a lighting preset.
+
 ## Commands
 
 ```sh
 pnpm install     # pnpm version comes from package.json `packageManager`
 pnpm dev         # dev server
+pnpm test        # vitest: pure logic (commands, search, lighting, framing)
+pnpm check       # astro check: types in .ts and .astro
 pnpm build       # static build to dist/
 pnpm preview     # serve dist/
 ```
-
 - pnpm blocks dependency build scripts unless listed under `allowBuilds` in `pnpm-workspace.yaml`.
   Only `esbuild` is allowed (Astro/Vite need its platform binary). Approve a new one with
   `pnpm approve-builds <pkg>` only after checking what its script does.

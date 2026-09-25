@@ -1,7 +1,7 @@
 # Portfolio — thiết kế
 
 Trạng thái: **đã chốt hướng cho cả 3 phần** · cập nhật 2026-09-25
-Đã scaffold (Astro 7.3.5, Tailwind 4.3.3, pnpm 12.6.0), `pnpm build` chạy qua. Chưa có code tính năng. Làm theo thứ tự ở mục 3, bắt đầu từ phần 1.
+Đã làm xong cả 3 phần, dùng model tạm dựng bằng code (giai đoạn B của D1). Việc tiếp theo: thay bằng model `.glb` làm từ MagicaVoxel và thay nội dung mẫu bằng nội dung thật.
 
 ## 1. Yêu cầu gốc (tóm tắt)
 
@@ -83,6 +83,8 @@ Rút ra từ các điểm trên, chưa kiểm chứng thêm:
 | @astrojs/mdx | 8.0.2 | peer `astro ^7.2.10`; chỉ cài nếu bài viết cần MDX |
 | tailwindcss + @tailwindcss/vite | 4.3.3 | người dùng chỉ định giữ Tailwind ở các bản **4.3.x** (2026-09-25). Khi Tailwind ra 4.4 thì hỏi người dùng trước khi nâng cấp |
 | three | 0.186.1 | |
+| typescript | 6.0.3 | **ngoại lệ**: bản mới nhất là 7.0.2, nhưng `@astrojs/check` 0.9.10 chỉ chấp nhận `typescript ^5 \|\| ^6`. Lên 7 khi `@astrojs/check` hỗ trợ |
+| three + @types/three | 0.186.1 / 0.186.0 | chunk riêng, 545 KB, gzip 136 KB (đo từ `dist/` ngày 2026-09-25) |
 | shiki | 4.4.3 | astro 7.3.5 phụ thuộc `shiki ^4.0.2`, nên chỉ có một bản shiki trong dự án |
 
 - **Cách áp dụng:** cài bằng `pnpm add <pkg>@latest` (Tailwind thì `@~4.3`), ghi `.nvmrc` = `24`, commit lockfile. Nâng cấp khi có major mới thì làm thành một việc riêng, không gộp chung với việc thêm tính năng.
@@ -146,5 +148,8 @@ Không còn câu nào. Q1–Q6 đã chốt thành D3, D5, D6, D7 và D8.
 
 ## 7. Chưa làm
 
-- Chưa đo dung lượng bundle Three.js và chưa quyết định lazy-load thế nào.
-- Chưa có nội dung thật cho `/me`, `/projects` và các bài viết.
+- Chưa có nội dung thật cho `/me`, `/projects` và các bài viết. Hiện là dữ liệu mẫu trong `src/data/` và `src/content/`.
+- Chưa có model `.glb` từ MagicaVoxel. Model hiện tại dựng bằng code trong `src/scene/model.ts`.
+- Chưa kiểm tra trên điện thoại thật: thao tác vuốt.
+- Nút Copy: chưa lần nào thấy copy thành công. Tab trình duyệt dùng để test không có focus, nên trình duyệt từ chối ghi clipboard và nút hiện "Copy failed" (đúng như code xử lý).
+- Chưa kiểm tra trường hợp người xem bật `prefers-reduced-motion`.

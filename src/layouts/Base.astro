@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import { locale, t } from '../i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = t('meta.description') } = Astro.props;
+const pageTitle = title ? `${title} · ${profile.siteTitle}` : profile.siteTitle;
+---
+
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1b1411" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

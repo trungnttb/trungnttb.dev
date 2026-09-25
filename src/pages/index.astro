@@ -1,17 +1,8 @@
 ---
-import '../styles/global.css';
+import AppShell from '../components/AppShell.astro';
+import Base from '../layouts/Base.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Portfolio</title>
-	</head>
-	<body class="min-h-dvh bg-stone-950 text-amber-100">
-		<h1 class="p-8 font-mono">portfolio</h1>
-	</body>
-</html>
+<Base>
+  <AppShell />
+</Base>

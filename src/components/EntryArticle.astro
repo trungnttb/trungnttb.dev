@@ -1,0 +1,25 @@
+---
+import { locale } from '../i18n';
+
+interface Props {
+  title: string;
+  date: Date;
+  tags: string[];
+  lang?: string;
+}
+
+const { title, date, tags, lang } = Astro.props;
+const formatted = new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+---
+
+<article class="entry" data-entry-article>
+  <h1 class="entry-title">{title}</h1>
+  <p class="entry-meta">
+    <time datetime={date.toISOString()}>{formatted}</time>
+    {lang && <span>{lang}</span>}
+    {tags.length > 0 && <span>{tags.map((tag) => `#${tag}`).join(' ')}</span>}
+  </p>
+  <div class="entry-body">
+    <slot />
+  </div>
+</article>

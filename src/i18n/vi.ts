@@ -1,0 +1,52 @@
+import type { Messages } from './en';
+
+export const vi: Messages = {
+  'meta.description': 'Portfolio: một lập trình viên ngồi bên bàn làm việc, trên màn hình laptop là một terminal.',
+
+  'scene.hint.scroll': 'Cuộn xuống',
+  'scene.hint.swipe': 'Vuốt lên',
+  'scene.hint.key': 'hoặc nhấn ~',
+  'scene.loading': 'Đang tải cảnh 3D…',
+  'toggle.label': 'Chuyển giữa bàn làm việc và terminal (~)',
+
+  'cli.prompt': 'guest@portfolio:~$',
+  'cli.inputLabel': 'Ô nhập lệnh',
+  'cli.commandsLabel': 'Các lệnh',
+  'cli.welcome': 'Xin chào. Gõ một lệnh, hoặc bấm vào lệnh trên thanh phía trên.',
+  'cli.notFound': 'không tìm thấy lệnh: {cmd}',
+  'cli.notFoundHint': 'Gõ /help để xem các lệnh có sẵn.',
+
+  'cmd.help': 'Liệt kê tất cả các lệnh',
+  'cmd.me': 'Giới thiệu bản thân và công việc',
+  'cmd.projects': 'Các project đã làm',
+  'cmd.posts': 'Bài viết dài (mở cửa sổ danh sách)',
+  'cmd.notes': 'Script và đoạn code dùng độc lập (mở cửa sổ danh sách)',
+
+  'help.title': 'Các lệnh có sẵn:',
+  'help.tips': 'Mẹo: ~ để chuyển giữa bàn làm việc và terminal · ↑/↓ gọi lại lệnh đã gõ · Tab để tự điền lệnh.',
+
+  'me.shares': 'Vài điều muốn chia sẻ:',
+  'me.links': 'Tìm tôi ở:',
+
+  'projects.title': 'Các project:',
+  'projects.empty': 'Chưa có project nào.',
+
+  'finder.opening': 'Đang mở {collection}…',
+  'finder.title.posts': 'Bài viết',
+  'finder.title.notes': 'Ghi chú',
+  'finder.search': 'Tìm trong {collection}',
+  'finder.col.name': 'Tên',
+  'finder.col.date': 'Ngày',
+  'finder.col.tags': 'Tag',
+  'finder.count': '{n} mục',
+  'finder.empty': 'Không có mục nào khớp với “{query}”.',
+  'finder.close': 'Đóng',
+  'finder.back': 'Quay lại danh sách',
+  'finder.loading': 'Đang tải…',
+  'finder.loadError': 'Không tải được nội dung này.',
+  'finder.openPage': 'Mở thành trang riêng',
+
+  'code.copy': 'Copy',
+  'code.copied': 'Đã copy',
+  'code.copyFailed': 'Copy không được',
+};
