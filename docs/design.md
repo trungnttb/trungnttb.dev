@@ -162,7 +162,7 @@ Rút ra từ các điểm trên, chưa kiểm chứng thêm:
 - **OG image:** sinh lúc build, kích thước 1200×630. Mỗi post/note có một ảnh ở `/og/<collection>/<id>.png`, trang chủ dùng `/og/site.png`. Ảnh gồm logo, domain, tiêu đề (tối đa 3 dòng), tóm tắt (tối đa 2 dòng), ngày, tag và tên tác giả. Font là JetBrains Mono; mỗi subset được đăng ký dưới một tên riêng, nếu không ảnh sẽ mất các chữ có dấu.
 - **Thẻ meta:** canonical, `og:*`, `article:*`, `twitter:card=summary_large_image`. Không khai báo `og:locale`, vì ngôn ngữ UI không phải lúc nào cũng trùng ngôn ngữ của bài viết.
 - **Nút chia sẻ:** Chia sẻ (Web Share API, chỉ hiện khi trình duyệt hỗ trợ), Copy link, X, Facebook, LinkedIn.
-- **Deploy:** GitHub Actions deploy lên GitHub Pages mỗi khi push lên `main`. Unit test phải qua thì mới deploy.
+- **Deploy:** GitHub Actions deploy lên GitHub Pages mỗi khi push lên `main`. Unit test phải qua thì mới deploy. Không dùng file `public/CNAME`: tài liệu GitHub ghi rằng khi deploy bằng Actions thì file này bị bỏ qua, domain phải khai báo trong Settings → Pages.
 - **Thông tin chủ site:** Nguyễn Thành Trung, sinh năm 1993, email trungnttb.dev@gmail.com.
 - **Xem lại khi:** cần ảnh OG riêng cho một bài (chèn ảnh tự chọn thay cho ảnh sinh tự động), hoặc khi đổi nơi host.
 

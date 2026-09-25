@@ -110,8 +110,10 @@ docs/research/  research write-ups (*.raw.md), e.g. OG images and share buttons
 
 GitHub Pages via `.github/workflows/deploy.yml` on every push to `main`: `withastro/action@v6`
 installs Node 24 and the pnpm version from `packageManager`, runs `pnpm test && pnpm build`, and
-`actions/deploy-pages@v5` publishes `dist/`. `public/CNAME` holds `trungnttb.dev`. One-time setup
-outside the repo: Settings → Pages → Source "GitHub Actions", and DNS records for the domain.
+`actions/deploy-pages@v5` publishes `dist/`. There is deliberately no `public/CNAME`: GitHub ignores
+it for Actions deployments, so the custom domain lives in Settings → Pages. One-time setup outside
+the repo: Settings → Pages → Source "GitHub Actions", Custom domain `trungnttb.dev` (before DNS),
+DNS records at the registrar, then "Enforce HTTPS".
 
 ## Commands
 
