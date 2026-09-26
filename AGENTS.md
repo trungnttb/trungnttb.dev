@@ -108,6 +108,8 @@ docs/research/  research write-ups (*.raw.md), e.g. OG images and share buttons
 
 ## Deploy
 
+Step-by-step first deploy and domain setup (Vietnamese): `docs/deploy-github-pages.md`.
+
 GitHub Pages via `.github/workflows/deploy.yml` on every push to `main`: `withastro/action@v6`
 installs Node 24 and the pnpm version from `packageManager`, runs `pnpm test && pnpm build`, and
 `actions/deploy-pages@v5` publishes `dist/`. There is deliberately no `public/CNAME`: GitHub ignores
