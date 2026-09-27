@@ -1,8 +1,9 @@
 ---
 import AppShell from '../components/AppShell.astro';
+import { profile } from '../data/profile';
 import Base from '../layouts/Base.astro';
 ---
 
-<Base>
+<Base title={`${profile.name} — ${profile.role}`} description={`${profile.role}. ${profile.bio[0]}`}>
   <AppShell />
 </Base>
