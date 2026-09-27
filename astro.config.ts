@@ -1,3 +1,4 @@
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import { codeBlockTransformer } from './src/app/code-block-transformer';
@@ -5,6 +6,7 @@ import { codeBlockTransformer } from './src/app/code-block-transformer';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://trungnttb.dev',
+  integrations: [sitemap()],
   markdown: {
     // Mermaid blocks stay as plain code so the client can render them as diagrams.
     syntaxHighlight: { type: 'shiki', excludeLangs: ['mermaid', 'math'] },

@@ -56,6 +56,9 @@ any part. Next: replace the placeholder model with a MagicaVoxel `.glb` (same no
   (`src/og/card.ts`) at `/og/site.png` and `/og/<collection>/<id>.png`. Each fontsource subset is
   registered under its own family name — satori does not fall back between files sharing a name,
   and Vietnamese diacritics silently disappear if they do.
+- **SEO:** `@astrojs/sitemap` writes `sitemap-index.xml` (HTML routes only); `/robots.txt` points to it.
+  JSON-LD comes from `src/seo/schema.ts`: `Person` + `WebSite` on `/`, `BlogPosting` for posts,
+  `TechArticle` for notes, passed to `Base.astro` through the `jsonLd` prop.
 - **Sharing:** detail pages carry Share (Web Share API, shown only when supported), Copy link, X,
   Facebook and LinkedIn. No Zalo button (owner's decision).
 - **Writing content:** use the project skill `.claude/skills/writing-posts` for new posts/notes.

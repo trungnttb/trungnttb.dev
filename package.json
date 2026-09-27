@@ -17,6 +17,7 @@
     "brand": "node scripts/build-brand.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "~4.3.3",

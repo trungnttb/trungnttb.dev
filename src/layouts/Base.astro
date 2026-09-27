@@ -10,12 +10,16 @@ interface Props {
   ogImage?: string;
   /** Set on post/note pages: marks the page as an article for link previews. */
   article?: { published: Date; tags: string[] };
+  /** Schema.org JSON-LD object(s) describing the page for search engines. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description = t('meta.description'), ogImage = '/og/site.png', article } = Astro.props;
+const { title, description = t('meta.description'), ogImage = '/og/site.png', article, jsonLd } = Astro.props;
 const pageTitle = title ? `${title} · ${profile.siteTitle}` : profile.siteTitle;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(ogImage, Astro.site);
+// Inline JSON must not be able to close its <script> tag.
+const jsonLdText = jsonLd ? JSON.stringify(jsonLd).replaceAll('<', '\\u003c') : undefined;
 ---
 
 <html lang={locale}>
@@ -47,6 +51,8 @@ const imageUrl = new URL(ogImage, Astro.site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {jsonLdText && <script type="application/ld+json" set:html={jsonLdText} />}
     <title>{pageTitle}</title>
   </head>
   <body>
