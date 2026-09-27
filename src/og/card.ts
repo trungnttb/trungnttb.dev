@@ -53,8 +53,8 @@ export interface OgCard {
   summary?: string;
   /** Bottom-left line, e.g. the date and tags. */
   meta?: string;
-  /** Bottom-right line, e.g. the author. */
-  byline: string;
+  /** Bottom-right call to action, e.g. "Read the post »". */
+  cta: string;
   domain: string;
 }
 
@@ -83,7 +83,9 @@ export async function renderOgPng(card: OgCard): Promise<Buffer> {
         {
           display: 'block',
           marginTop: 56,
-          fontSize: card.title.length > 60 ? 54 : 64,
+          // Measured on rendered cards: ~31 characters per line at 52px, so titles over 40 characters use 48px
+          // (~36 per line) to stay on two lines.
+          fontSize: [...card.title].length > 40 ? 48 : 64,
           fontWeight: 700,
           lineHeight: 1.2,
           lineClamp: 3,
@@ -103,7 +105,7 @@ export async function renderOgPng(card: OgCard): Promise<Buffer> {
           fontSize: 24,
           color: colors.latte,
         },
-        [el('div', {}, card.meta ?? ''), el('div', { marginLeft: 'auto', color: colors.foam }, card.byline)],
+        [el('div', {}, card.meta ?? ''), el('div', { marginLeft: 'auto', color: colors.crema, fontWeight: 700 }, card.cta)],
       ),
     ].filter(Boolean),
   );

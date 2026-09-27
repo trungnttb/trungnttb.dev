@@ -5,6 +5,6 @@ import Base from '../layouts/Base.astro';
 import { homeSchema } from '../seo/schema';
 ---
 
-<Base title={`${profile.name} — ${profile.role}`} description={`${profile.role}. ${profile.bio[0]}`} jsonLd={homeSchema()}>
+<Base title={`${profile.name} — ${profile.role}`} description={profile.bio[0]} jsonLd={homeSchema()}>
   <AppShell />
 </Base>

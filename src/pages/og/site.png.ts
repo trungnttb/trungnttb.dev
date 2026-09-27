@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { profile } from '../../data/profile';
 import { work } from '../../data/work';
+import { t } from '../../i18n';
 import { renderOgPng } from '../../og/card';
 
 export const GET: APIRoute = async () => {
@@ -12,7 +13,7 @@ export const GET: APIRoute = async () => {
       .flatMap((area) => work.stack.find((group) => group.area === area)?.items.slice(0, 2) ?? [])
       .join(', ')} · AI-first`,
     meta: '/help  /me  /work  /posts  /notes',
-    byline: profile.domain,
+    cta: t('og.cta.site'),
     domain: profile.domain,
   });
   return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });

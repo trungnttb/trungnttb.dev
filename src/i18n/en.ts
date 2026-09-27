@@ -65,6 +65,10 @@ export const en = {
   'share.copied': 'Link copied',
   'share.on': 'Share on {network}',
 
+  'og.cta.site': 'Open the terminal »',
+  'og.cta.posts': 'Read the post »',
+  'og.cta.notes': 'Open the note »',
+
   'code.copy': 'Copy',
   'code.copied': 'Copied',
   'code.copyFailed': 'Copy failed',

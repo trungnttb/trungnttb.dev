@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { profile } from '../data/profile';
 import { locale, t } from '../i18n';
+import { clipText, pageTitle as buildPageTitle } from '../seo/text';
 
 interface Props {
   title?: string;
@@ -14,8 +15,9 @@ interface Props {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description = t('meta.description'), ogImage = '/og/site.png', article, jsonLd } = Astro.props;
-const pageTitle = title ? `${title} · ${profile.siteTitle}` : profile.siteTitle;
+const { title, description: fullDescription = t('meta.description'), ogImage = '/og/site.png', article, jsonLd } = Astro.props;
+const pageTitle = buildPageTitle(title, profile.siteTitle);
+const description = clipText(fullDescription);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(ogImage, Astro.site);
 // Inline JSON must not be able to close its <script> tag.

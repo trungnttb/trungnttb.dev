@@ -67,6 +67,10 @@ export const vi: Messages = {
   'share.copied': 'Đã copy link',
   'share.on': 'Chia sẻ lên {network}',
 
+  'og.cta.site': 'Mở terminal »',
+  'og.cta.posts': 'Đọc bài »',
+  'og.cta.notes': 'Xem ghi chú »',
+
   'code.copy': 'Copy',
   'code.copied': 'Đã copy',
   'code.copyFailed': 'Copy không được',

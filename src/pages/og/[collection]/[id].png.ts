@@ -1,7 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { profile } from '../../../data/profile';
-import { locale } from '../../../i18n';
+import { locale, t } from '../../../i18n';
 import { renderOgPng } from '../../../og/card';
 
 const visible = ({ data }: { data: { draft: boolean } }) => import.meta.env.DEV || !data.draft;
@@ -27,8 +27,8 @@ export const GET: APIRoute<Props> = async ({ params, props }) => {
     kicker: `${params.collection}/`,
     title: props.title,
     summary: props.summary,
-    meta: [dateFormat.format(props.date), props.tags.map((tag) => `#${tag}`).join(' ')].filter(Boolean).join('  ·  '),
-    byline: profile.name,
+    meta: `${dateFormat.format(props.date)}  ·  ${profile.name}`,
+    cta: t(params.collection === 'posts' ? 'og.cta.posts' : 'og.cta.notes'),
     domain: profile.domain,
   });
   return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
